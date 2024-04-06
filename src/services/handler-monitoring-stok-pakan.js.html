@@ -1,0 +1,42 @@
+<script>
+  // Create an instance of the SKUManager
+  const skuManager = new SkuManager();
+
+  function handlingChangeFarmersMonitoringStokPakan() {
+    $('#list-petani').on('change', (e) => {
+      const value = $(e.target).val().split(' ');
+      const nama = value.slice(0, value.length - 2);
+      const leadId = value.slice(value.length - 1);
+
+      skuManager.skuCount = 1
+
+      $('.on-farmers-change').prop('disabled', false)
+      $('.on-farmers-change').val('')
+      $('#nama').val(nama.join(' '));
+      $('#lead-id').val(leadId);
+      $('.additional-sku').remove()
+    });
+  }
+
+  function functionInit(){
+    try {
+      $(window).on('beforeunload', showModalsOnLoading)
+      $('#loading-button').hide();
+      preventFormSubmit('form-monitoring-stok-pakan');
+      createListArea();
+      createListOnPageLoad();
+      handlingChangeArea();
+      handlingChangeFarmersMonitoringStokPakan();
+
+      $('#area').on('change', () => {
+        $('.additional-sku').remove()
+        skuManager.skuCount = 1
+      })
+    }
+    catch(err) {
+      onFailure(err)
+    }
+  };
+
+  $(document).ready(functionInit);
+</script>

@@ -1,0 +1,93 @@
+<!-- Farmers Information -->
+
+<div class="d-flex flex-column gap-1">
+  <label for="area">Area</label>
+  <select class="form-select" id="area" name="area" required>
+    <option value="" selected disabled>Pilih area</option>
+  </select>
+</div>
+<div class="d-flex flex-column gap-1">
+  <label for="list-petani">List petani</label>
+  <select class="form-select" id="list-petani" name="list_petani" disabled required>
+    <option value="" selected disabled>Pilih petani</option>
+  </select>
+</div>
+<div class="d-flex flex-column gap-1">
+  <label for="nama">Nama petani</label>
+  <input type="text" class="form-control on-area-change on-farmers-change" name="nama" id="nama" placeholder="Pilih list petani terlebih dahulu" readonly="readonly" disabled required>
+</div>
+<div class="d-flex flex-column gap-1">
+  <label for="lead-id">Lead id</label>
+  <input type="text" class="form-control on-area-change on-farmers-change" name="lead_id" id="lead-id" placeholder="Pilih list petani terlebih dahulu" readonly="readonly" disabled required>
+</div>
+
+<!-- Pond Information -->
+
+<section class="d-flex flex-column gap-2">
+  <div class="d-flex flex-column">
+    <p class="fw-bolder m-0">Data Tebar</p>
+  </div>
+  <div class="ps-3">
+    <div class="d-flex flex-column gap-1">
+      <label for="nomor-kolam">Nomor kolam</label>
+      <select class="form-select on-area-change on-farmers-change" id="nomor-kolam" name="nomor_kolam" disabled required>
+        <option value="" selected disabled>Pilih no kolam</option>
+      </select>
+    </div>
+  </div>
+  <div class="ps-3">
+    <div class="d-flex flex-column gap-1">
+      <label for="tanggal-tebar">Tanggal tebar</label>
+      <input type="date" class="form-control on-area-change on-farmers-change on-pond-change" name="tanggal_tebar" id="tanggal-tebar" disabled required>
+    </div>
+  </div>
+  <div class="ps-3">
+    <div class="d-flex flex-column gap-1">
+      <label for="komoditas">Komoditas</label>
+      <select class="form-select on-area-change on-farmers-change on-pond-change create-list-on-page-load" id="komoditas" name="komoditas" disabled required>
+        <option value="" selected disabled>Pilih komoditas</option>
+      </select>
+    </div>
+  </div>
+  <div class="ps-3">
+    <div class="d-flex flex-column gap-1">
+      <label for="wadah-benih">Wadah pengiriman benih</label>
+      <select class="form-select on-area-change on-farmers-change on-pond-change create-list-on-page-load" id="wadah-benih" name="wadah_benih" disabled required>
+        <option value="" selected disabled>Pilih wadah pengiriman benih</option>
+      </select>
+    </div>
+  </div>
+  <div class="ps-3">
+    <div class="d-flex flex-column gap-1">
+      <label for="total-benih-per-kolam" id="label-total-benih-per-kolam">Total benih per kolam (kg)</label>
+      <input type="number" class="form-control on-area-change on-farmers-change on-pond-change" name="total_benih_per_kolam" id="total-benih-per-kolam" min="0" step="0.01" disabled required>
+    </div>
+  </div>
+  <div class="ps-3">
+    <div class="d-flex flex-column gap-1">
+      <label for="sampling-benih" id="label-sampling-benih">Size sampling benih (ekor/kg)</label>
+      <input type="number" class="form-control on-area-change on-farmers-change on-pond-change" name="sampling_benih" id="sampling-benih" min="0" step="0.1" disabled required>
+    </div>
+  </div>
+  <div class="ps-3">
+    <div class="d-flex flex-column gap-1">
+      <label for="apakah-midway">Apakah kolam tebar sebelum gabung program KSE?</label>
+      <select class="form-select on-area-change on-farmers-change on-pond-change yes-or-no-option" id="apakah-midway" name="apakah_midway" disabled required>
+      </select>
+    </div>
+  </div>
+  <div class="ps-3">
+    <div class="d-flex flex-column gap-1">
+      <label for="apakah-benih-efishery">Apakah benih beli dari efishery menggunakan limit KSE?</label>
+      <select class="form-select on-area-change on-farmers-change on-pond-change yes-or-no-option" id="apakah-benih-efishery" name="apakah_benih_efishery" disabled required>
+      </select>
+    </div>
+  </div>
+</section>
+
+<!-- Upload File -->
+
+<section class="d-flex flex-column gap-2">
+  <label for="foto" class="fw-bolder">Dokumentasi Monitoring Tebar KSE</label>
+  <input type="file" class="form-control on-submit-change on-area-change on-farmers-change on-pond-change" name="foto" id="foto" accept="image/*" multiple required disabled>
+</section>

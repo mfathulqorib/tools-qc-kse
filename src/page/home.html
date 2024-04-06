@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<script>
+  if (window.trustedTypes && window.trustedTypes.createPolicy) {
+    window.trustedTypes.createPolicy('default', {
+      createHTML: string => string,
+      createScriptURL: string => string,
+      createScript: string => string,
+    });
+  }
+</script>
+<head>
+  <base target="_top">
+  <?!= includeStyle('global.css'); ?>  
+</head>
+  <body>
+    {{NAVBAR}}
+
+  <div>
+    Ini Home
+  </div>
+
+  </body>
+</html>

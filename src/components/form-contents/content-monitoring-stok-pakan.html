@@ -1,0 +1,81 @@
+<!-- Farmers Information -->
+
+<div class="d-flex flex-column gap-1">
+  <label for="area">Area</label>
+  <select class="form-select" id="area" name="area" required>
+    <option value="" selected disabled>Pilih area</option>
+  </select>
+</div>
+<div class="d-flex flex-column gap-1">
+  <label for="list-petani">List petani</label>
+  <select class="form-select" id="list-petani" name="list_petani" disabled required>
+    <option value="" selected disabled>Pilih petani</option>
+  </select>
+</div>
+<div class="d-flex flex-column gap-1">
+  <label for="nama">Nama petani</label>
+  <input type="text" class="form-control on-area-change on-farmers-change" name="nama" id="nama" placeholder="Pilih list petani terlebih dahulu" readonly="readonly" disabled required>
+</div>
+<div class="d-flex flex-column gap-1">
+  <label for="lead-id">Lead id</label>
+  <input type="text" class="form-control on-area-change on-farmers-change" name="lead_id" id="lead-id" placeholder="Pilih list petani terlebih dahulu" readonly="readonly" disabled required>
+</div>
+  
+<!-- Feed Stock Information -->
+
+<section class="d-flex flex-column gap-2">
+  <div class="d-flex flex-column gap-2" id="list-sku-pakan">
+    <div class="d-flex flex-column gap-2">
+      <p class="fw-bolder m-0">Data Stok Pakan</p>
+    </div>
+    <div class="ps-3">
+      <div class="d-flex flex-column gap-1">
+        <label for="tanggal-cek-pakan">Tanggal Pengecekan Stok Pakan</label>
+        <input type="date" class="form-control on-area-change on-farmers-change" name="tanggal_cek_pakan" id="tanggal-cek-pakan" disabled required>
+      </div>
+    </div>
+    <div class="ps-3">
+      <div class="d-flex flex-column gap-1">
+        <label for="sku-pakan">SKU Pakan 1</label>
+        <select class="form-select on-area-change on-farmers-change create-list-on-page-load" name="sku_pakan_1" id="sku-pakan" disabled required>
+          <option selected disabled value="">Pilih SKU pakan sebelum mengisi stok pakan</option>
+        </select>
+      </div>
+    </div>
+    <div class="ps-3">
+      <div class="d-flex flex-column gap-1">
+        <label for="qty-pakan-1">Stok Pakan 1 (sak)</label>
+        <input class="form-control on-area-change on-farmers-change" type="number" min="0" id="qty-pakan-1" name="qty_pakan_1" placeholder="Jumlah sak utuh yang belum dibuka" required disabled>
+      </div>
+    </div>
+    <div class="ps-3">
+      <div class="d-flex flex-column gap-1">
+        <label for="qty-pakan-1-open">Stok Pakan 1 (kg)</label>
+        <input class="form-control on-area-change on-farmers-change" type="number" min="0" id="qty-pakan-1-open" name="qty_pakan_1_open" step="0.1" placeholder="Sisa kg isi sak pakan yang sudah dibuka" disabled>
+      </div>
+    </div>
+    <div class="ps-3">  
+      <hr class="hr border-3 my-2" />
+    </div>
+  </div>
+  <div class="ps-3 my-1">
+    <div class="d-flex flex-column">
+      <button type="button" class="btn btn-secondary btn-block" id="add-sku-button" onclick="skuManager.addSKU()">Tambah SKU pakan</button>
+      <div class="form-text">Maksimal 4 SKU pakan yang bisa ditambahkan</div>
+    </div>
+  </div>
+  <div class="my-1">
+    <div class="d-flex flex-column">
+      <label for="keterangan">Keterangan</label>
+      <textarea class="form-control on-area-change on-farmers-change" id="keterangan" name="keterangan" value="" placeholder="Tulis disini jika ada temuan kasus terkait stok pakan!" value disabled></textarea>
+    </div>
+  </div>
+</section>
+
+<!-- Upload File -->
+
+<section class="d-flex flex-column gap-2">
+  <label for="foto" class="fw-bolder">Dokumentasi Monitoring Stok Pakan</label>
+  <input type="file" class="form-control on-submit-change on-area-change on-farmers-change on-pond-change" name="foto" id="foto" accept="image/*" multiple required disabled>
+</section>
+

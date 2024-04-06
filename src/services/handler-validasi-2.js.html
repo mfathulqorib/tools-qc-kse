@@ -1,0 +1,53 @@
+<script>
+  function handlingChangeFarmersValidasi2() {
+    $('#list-petani').on('change', (e) => {
+      const value = $(e.target).val().split(' ');
+      const nama = value.slice(0, value.length - 2);
+      const leadId = value.slice(value.length - 1);
+
+      $('.on-farmers-change').prop('disabled', false)
+      $('.on-farmers-change').val('')
+      $('#nama').val(nama.join(' '));
+      $('#lead-id').val(leadId);
+      createListPonds()
+    });
+  }
+
+function handlingChangeStatusKesiapanKolam() {
+  $('#status-kesiapan-kolam').on('change', handleStatusChange);
+}
+
+function handleStatusChange(e) {
+  const status = e.target.value;
+  const isReadyOrCanceled = ['Siap tebar', 'Kolam cancel'].includes(status);
+  const isOther = status === 'Lainnya';
+
+  $('#estimasi-siap-tebar, #satuan-waktu')
+    .prop('required', !isReadyOrCanceled)
+    .prop('disabled', isReadyOrCanceled)
+    .val('');
+
+  $('#status-kesiapan-kolam-lainnya')
+    .prop('required', isOther)
+    .prop('disabled', !isOther).
+    val('');
+}
+
+  function functionInit(){
+    try {
+      $(window).on('beforeunload', showModalsOnLoading)
+      $('#loading-button').hide();
+      preventFormSubmit('form-validasi-2');
+      createListArea();
+      createListOnPageLoad();
+      handlingChangeArea();
+      handlingChangeFarmersValidasi2();
+      handlingChangeStatusKesiapanKolam();
+    }
+    catch(err) {
+      onFailure(err)
+    }
+  };
+
+  $(document).ready(functionInit);
+</script>

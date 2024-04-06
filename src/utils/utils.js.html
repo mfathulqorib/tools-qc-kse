@@ -1,0 +1,326 @@
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+<script>
+
+  function preventFormSubmit(formId) {
+    const $forms = $(`#${formId}`);
+    $forms.on('submit', (event) => {
+      event.preventDefault()
+    })
+  }
+
+  function onFailure(error) {
+    const massage = error.toString()
+
+    $('#spinnerModal').modal('hide');
+    $('#submit-button').removeAttr('disabled');
+    $('#loading-button').hide();
+    alert(massage)
+  }
+
+  function numericInput(inp) {
+    const $inp = $(`#${inp}`);
+    const numericKeys = '.0123456789';
+
+    // Restricts input to numeric keys 0-9
+    $inp.on('keypress', function(e) {
+      if (numericKeys.indexOf(e.key) === -1) {
+        e.preventDefault();
+      }
+    });
+
+    // Add the thousands separator when the user blurs
+    $inp.on('blur', function() {
+      const tmp = $(this).val().replace(/,/g, '');
+      const val = Number(tmp).toLocaleString('en-CA');
+
+      $(this).val(tmp === '' ? '' : val);
+    });
+
+    // Strip the thousands separator when the user puts the input in focus
+    $inp.on('focus', function() {
+      $(this).val($(this).val().replace(/,/g, ''));
+    });
+  }
+
+  function showToastOnSuccess() {
+    const toastLiveExample = $('#success-toast')[0]
+    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+    toastBootstrap.show()
+  }
+
+  function toTop() {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }
+
+  function uploadDataFormOnSuccess(dataFromUploadData, dataFromUploadImages, formId) {
+    const $form = $(`#${formId}`)
+
+    console.log("success ", dataFromUploadData, dataFromUploadImages);
+
+    toTop();
+    $('#submit-button').prop('disabled', false);
+    $('#loading-button').hide();
+    
+    // rest form field input value to null
+    $form.find('select, input, textarea').val('');
+    $('#list-petani').prop('disabled', true);
+    $('.on-area-change').prop('disabled', true);
+
+    $('#success-toast-message').text('Berhasil upload data');
+    showToastOnSuccess();
+  }
+
+  function showModalsOnLoading() {
+    $('#spinnerModal').modal('show');
+  }
+  
+  // FORM SUBMIT handler section
+  function handleFormSubmit(formData) {
+    const formId = formData.id
+    const fileUpload = $('#foto')[0].files;
+    const namaPetani = $('#nama').val();
+    const nomerKolam = $('#nomor-kolam').val() || "";
+    const uploadDataPromise = new Promise((resolve, reject) => {
+      google.script.run
+        .withSuccessHandler(resolve)
+        .withFailureHandler(reject)
+        .uploadData(formData);
+    });
+    const photos = Promise.all([...fileUpload].slice(0, 3).map((file, i) => {
+      return new Promise((resolve) => {
+        const fr = new FileReader();
+        fr.onload = (e) => {
+          const data = e.target.result.split(",");
+          resolve({
+            fileName: `${namaPetani.toUpperCase()} ${nomerKolam ? "KOLAM" + nomerKolam : ""} (${i + 1})`,
+            mimeType: data[0].match(/:(\w.+);/)[1],
+            data: data[1]
+          });
+        }
+        fr.readAsDataURL(file);
+      });
+    }));
+    const uploadImagesPromise = photos.then((obj) => {
+      return new Promise((resolve, reject) => {
+        google.script.run
+          .withSuccessHandler(resolve)
+          .withFailureHandler(reject)
+          .uploadImages(obj);
+      });
+    });
+
+    $('#loading-button').show();
+    $('#submit-button').prop('disabled', true);
+
+    Promise.all([uploadDataPromise, uploadImagesPromise])
+      .then((results) => {
+        // Both uploadData and uploadImages succeeded
+        const dataFromUploadData = results[0]; // Result from uploadData
+        const dataFromUploadImages = results[1]; // Result from uploadImages
+
+        uploadDataFormOnSuccess(dataFromUploadData, dataFromUploadImages, formId);
+        $('.deleted-after-submit').remove()
+      })
+      .catch((error) => {
+        // Either uploadData or uploadImages failed
+        onFailure(error);
+      });
+  }
+
+  // end of FORM SUBMIT handler section
+
+  // DOM FUNCTION section
+  function listArea(values) { //Ref: https://stackoverflow.com/a/53771955/2391195
+    const $list = $('#area'); // Get the <select> element with id 'area'
+    
+    values.forEach((value, index) => { // Loop through the values array
+      const $option = $('<option>')
+      
+      $option
+        .val(value)
+        .text(value);
+      $list.append($option)
+    }); // Create and append an <option> element
+    
+    $('#spinnerModal').modal('hide');
+  }
+
+  function createListArea() {
+    $('#spinnerModal').modal('show');
+    google.script.run
+      .withSuccessHandler(listArea)
+      .withFailureHandler(onFailure)
+      .getListArea();
+  }
+
+  function listFarmers(values) {
+    const $list = $('#list-petani');
+    const $placeholderOpt = $('<option>');
+    const area = $('#area').val();
+
+    // Set the properties of the <option> element
+    $placeholderOpt
+      .val('')
+      .text('Pilih petani')
+      .prop('selected', true)
+      .prop('disabled', true);
+
+    // Append the <option> element to the <select>
+    $list.append($placeholderOpt);
+
+    $('#spinnerModal').modal('hide');
+
+    values.forEach((values, index) => {
+      if(values[1] === area) {
+        const $option = $('<option>');
+        $option
+          .val(values[0])
+          .text(values[0]);
+        $list.append($option);
+      }
+    })
+  }
+
+  function createListFarmers() {
+    $('#spinnerModal').modal('show');
+    google.script.run
+      .withSuccessHandler(listFarmers)
+      .withFailureHandler(onFailure)
+      .getListFarmers()
+  }
+
+  function handlingChangeArea() {
+    $('#area').on('change', () => {
+      $('.on-area-change').val('')
+      $('#list-petani')
+        .empty()
+        .prop('disabled', false);
+      createListFarmers();
+
+      if(!$('#list-petani').val()) {
+        $('.on-area-change')
+          .val('')
+          .prop('disabled', true);
+      }
+    });
+  }
+
+  function handlingChangeFarmer() {
+    $('#list-petani').on('change', function() {
+      const value = $(this).val().split(' ');
+      const nama = value.slice(0, value.length - 2);
+      const leadId = value.slice(value.length - 1);
+
+      $('.on-farmers-change').prop('disabled', false)
+      $('.on-farmers-change').val('')
+      $('#nama').val(nama.join(' '));
+      $('#lead-id').val(leadId);
+    });
+  }
+
+  function createYesOrNoOption() {
+    const $optionYesOrNo = $('.yes-or-no-option');
+    const optionVal = ['', 'Ya', 'Tidak'];
+
+    // Create options using Array.forEach() and jQuery's text(), val(), and appendTo()
+    optionVal.forEach((value, index) => {
+      const isSelected = !value;
+      const isDisabled = !value;
+      const optionValue = value === 'Ya' ? 1 : value === 'Tidak' ? 0 : value;
+
+      $('<option>')
+        .text(value)
+        .val(optionValue)
+        .prop('selected', isSelected)
+        .prop('disabled', isDisabled)
+        .appendTo($optionYesOrNo);
+    });
+
+    $optionYesOrNo.val('');
+  }
+
+  function listOnPageLoad(values, id) {
+    const $list = $(`#${id}`);
+
+    values.forEach((val, index) => {
+      $list.append($('<option>').val(val).text(val));
+    });
+    $('#spinnerModal').modal('hide');
+  }
+
+  function listPonds(values) {
+    const $select = $('#nomor-kolam');
+    const $placeholderOpt = $('<option>')
+    
+    const leadId = $('#lead-id').val();
+    const sortedPondNumbers = values
+      .filter(([id]) => id === leadId)
+      .map(([, pondNumber]) => pondNumber)
+      .sort((a, b) => a - b);
+    
+    $('#spinnerModal').modal('hide');
+
+    $placeholderOpt
+      .val('')
+      .text('Pilih no kolam')
+      .prop('selected', true)
+      .prop('disabled', true);
+
+    $select
+      .empty()
+      .append($placeholderOpt);
+
+    sortedPondNumbers.forEach((pondNumber, index) => {
+      $select.append($('<option>', {
+        value: pondNumber,
+        text: pondNumber
+      }));
+    });
+  }
+
+  function createListPonds() {
+    $('#spinnerModal').modal('show');
+    google.script.run
+      .withSuccessHandler(listPonds)
+      .withFailureHandler(onFailure)
+      .getListPonds()
+  }
+
+  function createListOnPageLoad() {
+    const element = $('.create-list-on-page-load')
+
+    element.each((index, element) => {
+      $('#spinnerModal').modal('show');
+      google.script.run
+        .withSuccessHandler(listOnPageLoad)
+        .withFailureHandler(onFailure)
+        .withUserObject(element.id)
+        .getEnumList(element.id);
+    })
+    
+    createYesOrNoOption();
+  }
+
+  function handlingChangePond() {
+    $('#nomor-kolam').on('change', () => {
+      // Reset and enable the on-pond-change elements
+      $('.on-pond-change')
+      .val('')
+      .prop('disabled', false);
+    });
+  }
+
+  function hideSpinnerModal() {
+    if($('#spinnerModal').is(':visible')) {
+      $('#spinnerModal').modal('hide');
+    };
+  }
+
+  // end of DOM FUNCTION section 
+</script>
