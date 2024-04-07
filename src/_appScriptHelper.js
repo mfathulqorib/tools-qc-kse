@@ -142,5 +142,21 @@ const listSheetInformation = {
       'list-petani': 'B2:C',
       'sku-pakan': 'I2:I'
     }
+  },
+  'monitoring-budidaya': {
+    sheetId: '1g8O_p2w7bAgBHTtMjTy1x_mzyaUYA2IVgyeZk00XtlM',
+    sheetUploadData: '0. Data monitoring budidaya',
+    sheetUploadImage: '1. Dokumentasi monitoring budidaya',
+    folderUploadImage: '1cd8J8OuTgNXdPKiB4avE5QCYju3APdFE',
+    orderedKeyUploadData: [
+      'nama', 
+      'lead_id', 
+      'area',
+    ],
+    columnRanges: {
+      'area': 'A2:A',
+      'list-petani': 'B2:C',
+      'nomor-kolam': 'D2:F',
+    }
   }
 };

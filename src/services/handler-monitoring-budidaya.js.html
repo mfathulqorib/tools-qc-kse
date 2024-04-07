@@ -1,0 +1,93 @@
+<script>
+  function handleFormMonitoringBudidaya(formData) {
+    const formId = formData.id;
+    const namaPetani = $('#nama').val();
+    const nomerKolam = $('#nomor-kolam').val() || "";
+    const fileDokumentasi = $('#foto')[0].files;
+    const fileKematianIkan = $('#foto-kematian')[0].files || [];
+
+    const uploadDataPromise = new Promise((resolve) => {
+      google.script.run
+        .withSuccessHandler(resolve)
+        .withFailureHandler(onFailure)
+        .uploadData(formData);
+    });
+
+    const readFileAsDataURL = (file) => new Promise((resolve, reject) => {
+      const fr = new FileReader();
+      fr.onload = (e) => resolve(e.target.result.split(","));
+      fr.onerror = reject;
+      fr.readAsDataURL(file);
+    });
+
+    const generateFileData = (fileArray, prefix, type) => Promise.all(
+      [...fileArray].slice(0, 2).map((file, i) => {
+        return readFileAsDataURL(file)
+          .then(([metadata, data]) => ({
+            fileName: `${prefix} ${namaPetani.toUpperCase()} ${nomerKolam ? `KOLAM${nomerKolam}` : ""} (${i + 1})`,
+            mimeType: metadata.match(/:(\w.+);/)[1],
+            data,
+            type,
+          }));
+      })
+    );
+
+    const photosDokumentasi = generateFileData(fileDokumentasi, "", "dokumentasi");
+    const photosKematianIkan = generateFileData(fileKematianIkan, "DOKUMENTASI KEMATIAN", "kematian");
+    const allPhotos = Promise.all([photosDokumentasi, photosKematianIkan])
+      .then((result) => result.flat())
+
+      const uploadImagesPromise = allPhotos.then((obj) => {
+        console.log(obj)
+        return new Promise((resolve) => {
+          google.script.run
+            .withSuccessHandler(resolve)
+            .withFailureHandler(onFailure)
+            .uploadImages(obj.flat(Infinity));
+        });
+      });
+
+    showLoadingIndicator();
+
+    Promise.all([uploadDataPromise, uploadImagesPromise])
+      .then((results) => {
+        // Both uploadData and uploadImages succeeded
+        const dataFromUploadData = results[0]; // Result from uploadData
+        const dataFromUploadImages = results[1]; // Result from uploadImages
+
+        uploadDataFormOnSuccess(dataFromUploadData, dataFromUploadImages, formId);
+        $('.deleted-after-submit').remove()
+      })
+      .catch((error) => {
+        // Either uploadData or uploadImages failed
+        onFailure(error);
+      });
+    }
+
+  const showLoadingIndicator = () => {
+    $('#loading-button').show();
+    $('#submit-button').prop('disabled', true);
+  };
+
+  const hideLoadingIndicator = () => {
+    $('#loading-button').hide();
+    $('#submit-button').prop('disabled', false);
+  };
+
+  function functionInit(){
+    try {
+      $(window).on('beforeunload', showModalsOnLoading)
+      $('#loading-button').hide();
+      preventFormSubmit('form-monitoring-budidaya');
+      createListArea();
+      createListOnPageLoad();
+      handlingChangeArea();
+      handlingChangeFarmer();
+    }
+    catch(err) {
+      onFailure(err)
+    }
+  };
+
+  $(document).ready(functionInit);
+</script>

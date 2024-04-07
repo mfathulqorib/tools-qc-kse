@@ -33,6 +33,7 @@ function getNavbar(page) {
   const scriptURLValidasi2Page = getScriptURL("mode=validasi-2");
   const scriptURLMonitoringTebar = getScriptURL("mode=monitoring-tebar");
   const scriptURLMonitoringStokPakan = getScriptURL("mode=monitoring-stok-pakan");
+  const scriptURLMonitoringBudidaya = getScriptURL("mode=monitoring-budidaya");
 
   const navLinks = [
     {
@@ -59,6 +60,11 @@ function getNavbar(page) {
       text: "Monitoring Stok Pakan",
       url: scriptURLMonitoringStokPakan,
       isActive: page === "monitoring-stok-pakan"
+    },
+    {
+      text: "Monitoring Budidaya",
+      url: scriptURLMonitoringBudidaya,
+      isActive: page === "monitoring-budidaya"
     }
   ];
 
