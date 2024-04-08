@@ -1,10 +1,12 @@
 <script>
   function handleFormMonitoringBudidaya(formData) {
     const formId = formData.id;
-    const namaPetani = $('#nama').val();
-    const nomerKolam = $('#nomor-kolam').val() || "";
-    const fileDokumentasi = $('#foto')[0].files;
-    const fileKematianIkan = $('#foto-kematian')[0].files || [];
+    const namaPetani = $("#nama").val();
+    const nomerKolam = $("#nomor-kolam").val() || "";
+    const fileKematianIkan = $("#foto-kematian")[0].files || [];
+    const fileLogbookPakan = $("#foto-logbook-pakan")[0].files || [];
+    const fileBencanaAlam = $("#foto-bencana-alam")[0].files || [];
+    const fileDokumentasi = $("#foto")[0].files;
 
     const uploadDataPromise = new Promise((resolve) => {
       google.script.run
@@ -13,39 +15,67 @@
         .uploadData(formData);
     });
 
-    const readFileAsDataURL = (file) => new Promise((resolve, reject) => {
-      const fr = new FileReader();
-      fr.onload = (e) => resolve(e.target.result.split(","));
-      fr.onerror = reject;
-      fr.readAsDataURL(file);
-    });
+    const readFileAsDataURL = (file) => {
+      return new Promise((resolve, reject) => {
+        const fr = new FileReader();
+        fr.onload = (e) => resolve(e.target.result.split(","));
+        fr.onerror = reject;
+        fr.readAsDataURL(file);
+      });
+    };
 
-    const generateFileData = (fileArray, prefix, type) => Promise.all(
-      [...fileArray].slice(0, 2).map((file, i) => {
-        return readFileAsDataURL(file)
-          .then(([metadata, data]) => ({
-            fileName: `${prefix} ${namaPetani.toUpperCase()} ${nomerKolam ? `KOLAM${nomerKolam}` : ""} (${i + 1})`,
+    const generateFileData = (fileArray, prefix, type, limit = Infinity) => {
+      return Promise.all(
+        [...fileArray].slice(0, limit).map((file, i) => {
+          return readFileAsDataURL(file).then(([metadata, data]) => ({
+            fileName: `${prefix} ${namaPetani.toUpperCase()} ${
+              nomerKolam ? `KOLAM${nomerKolam}` : ""
+            } (${i + 1})`,
             mimeType: metadata.match(/:(\w.+);/)[1],
             data,
             type,
           }));
-      })
+        })
+      );
+    };
+
+    const photosDokumentasi = generateFileData(
+      fileDokumentasi,
+      "",
+      "dokumentasi",
+      1
     );
+    const photosKematianIkan = generateFileData(
+      fileKematianIkan,
+      "DOKUMENTASI KEMATIAN",
+      "kematian"
+    );
+    const photosLogbookPakan = generateFileData(
+      fileLogbookPakan,
+      "LOGBOOK PAKAN",
+      "logbook pakan"
+    );
+    const photosBencanaAlam = generateFileData(
+      fileBencanaAlam,
+      "BENCANA ALAM",
+      "bencana alam"
+    );
+    const allPhotos = Promise.all([
+      photosDokumentasi,
+      photosKematianIkan,
+      photosLogbookPakan,
+      photosBencanaAlam,
+    ]).then((result) => result.flat());
 
-    const photosDokumentasi = generateFileData(fileDokumentasi, "", "dokumentasi");
-    const photosKematianIkan = generateFileData(fileKematianIkan, "DOKUMENTASI KEMATIAN", "kematian");
-    const allPhotos = Promise.all([photosDokumentasi, photosKematianIkan])
-      .then((result) => result.flat())
-
-      const uploadImagesPromise = allPhotos.then((obj) => {
-        console.log(obj)
-        return new Promise((resolve) => {
-          google.script.run
-            .withSuccessHandler(resolve)
-            .withFailureHandler(onFailure)
-            .uploadImages(obj.flat(Infinity));
-        });
+    const uploadImagesPromise = allPhotos.then((obj) => {
+      console.log(obj);
+      return new Promise((resolve) => {
+        google.script.run
+          .withSuccessHandler(resolve)
+          .withFailureHandler(onFailure)
+          .uploadImages(obj.flat(Infinity));
       });
+    });
 
     showLoadingIndicator();
 
@@ -55,39 +85,46 @@
         const dataFromUploadData = results[0]; // Result from uploadData
         const dataFromUploadImages = results[1]; // Result from uploadImages
 
-        uploadDataFormOnSuccess(dataFromUploadData, dataFromUploadImages, formId);
-        $('.deleted-after-submit').remove()
+        uploadDataFormOnSuccess(
+          dataFromUploadData,
+          dataFromUploadImages,
+          formId
+        );
+        $(".deleted-after-submit").remove();
       })
       .catch((error) => {
         // Either uploadData or uploadImages failed
         onFailure(error);
       });
-    }
+  }
 
-  const showLoadingIndicator = () => {
-    $('#loading-button').show();
-    $('#submit-button').prop('disabled', true);
-  };
+  function handlingChangeFarmersValidasi2() {
+    $("#list-petani").on("change", (e) => {
+      const value = $(e.target).val().split(" ");
+      const nama = value.slice(0, value.length - 2);
+      const leadId = value.slice(value.length - 1);
 
-  const hideLoadingIndicator = () => {
-    $('#loading-button').hide();
-    $('#submit-button').prop('disabled', false);
-  };
+      $(".on-farmers-change").prop("disabled", false);
+      $(".on-farmers-change").val("");
+      $("#nama").val(nama.join(" "));
+      $("#lead-id").val(leadId);
+      createListPonds();
+    });
+  }
 
-  function functionInit(){
+  function functionInit() {
     try {
-      $(window).on('beforeunload', showModalsOnLoading)
-      $('#loading-button').hide();
-      preventFormSubmit('form-monitoring-budidaya');
+      $(window).on("beforeunload", showModalsOnLoading);
+      $("#loading-button").hide();
+      preventFormSubmit("form-monitoring-budidaya");
       createListArea();
       createListOnPageLoad();
       handlingChangeArea();
-      handlingChangeFarmer();
+      handlingChangeFarmersValidasi2();
+    } catch (err) {
+      onFailure(err);
     }
-    catch(err) {
-      onFailure(err)
-    }
-  };
+  }
 
   $(document).ready(functionInit);
 </script>
