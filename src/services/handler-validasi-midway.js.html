@@ -1,39 +1,39 @@
 <script>
   function handlingChangeFarmerMidway() {
-    $('#list-petani').on('change', (e) => {
-      const value = $(e.target).val().split(' ');
+    $("#list-petani").on("change", (e) => {
+      const value = $(e.target).val().split(" ");
       const nama = value.slice(0, value.length - 2);
       const leadId = value.slice(value.length - 1);
 
-      $('.on-farmers-change').prop('disabled', false)
-      $('.on-farmers-change').val('')
-      $('#nama').val(nama.join(' '));
-      $('#lead-id').val(leadId);
-      createListPonds()
+      $(".on-farmers-change").prop("disabled", false);
+      $(".on-farmers-change").val("");
+      $("#nama").val(nama.join(" "));
+      $("#lead-id").val(leadId);
+      createListPonds();
     });
   }
-  
-  function functionInit(){
-    try {
-      const $fieldNumericInput = $('.numeric-input')
 
-      $(window).on('beforeunload', showModalsOnLoading)
-      $('#loading-button').hide();
-      preventFormSubmit('form-validasi-midway');
+  function functionInit() {
+    try {
+      const $fieldNumericInput = $(".numeric-input");
+
+      $(window).on("beforeunload", showModalsOnLoading);
+      $("#loading-button").hide();
+      preventFormSubmit("form-validasi-midway");
       createListArea();
       createListOnPageLoad();
       handlingChangeArea();
       handlingChangeFarmerMidway();
       handlingChangePond();
+      handlingYesOrNoQuestion("#apakah-ada-buyer", ".on-ada-buyer-change");
 
       $fieldNumericInput.each((index, element) => {
         numericInput(element.id);
-      })
+      });
+    } catch (err) {
+      onFailure(err);
     }
-    catch(err) {
-      onFailure(err)
-    }
-  };
+  }
 
   $(document).ready(functionInit);
 </script>

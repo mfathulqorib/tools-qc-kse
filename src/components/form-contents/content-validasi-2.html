@@ -8,17 +8,41 @@
 </div>
 <div class="d-flex flex-column gap-1">
   <label for="list-petani">List petani</label>
-  <select class="form-select" id="list-petani" name="list_petani" disabled required>
+  <select
+    class="form-select"
+    id="list-petani"
+    name="list-petani"
+    disabled
+    required
+  >
     <option value="" selected disabled>Pilih petani</option>
   </select>
 </div>
 <div class="d-flex flex-column gap-1">
   <label for="nama">Nama petani</label>
-  <input type="text" class="form-control on-area-change on-farmers-change" name="nama" id="nama" placeholder="Pilih list petani terlebih dahulu" readonly="readonly" disabled required>
+  <input
+    type="text"
+    class="form-control on-area-change on-farmers-change"
+    name="nama"
+    id="nama"
+    placeholder="Pilih list petani terlebih dahulu"
+    readonly="readonly"
+    disabled
+    required
+  />
 </div>
 <div class="d-flex flex-column gap-1">
   <label for="lead-id">Lead id</label>
-  <input type="text" class="form-control on-area-change on-farmers-change" name="lead_id" id="lead-id" placeholder="Pilih list petani terlebih dahulu" readonly="readonly" disabled required>
+  <input
+    type="text"
+    class="form-control on-area-change on-farmers-change"
+    name="lead-id"
+    id="lead-id"
+    placeholder="Pilih list petani terlebih dahulu"
+    readonly="readonly"
+    disabled
+    required
+  />
 </div>
 
 <!-- Pond Information -->
@@ -30,7 +54,13 @@
   <div class="ps-3">
     <div class="d-flex flex-column gap-1">
       <label for="nomor-kolam">Nomor kolam</label>
-      <select class="form-select on-area-change on-farmers-change" id="nomor-kolam" name="nomor_kolam" disabled required>
+      <select
+        class="form-select on-area-change on-farmers-change"
+        id="nomor-kolam"
+        name="nomor-kolam"
+        disabled
+        required
+      >
         <option value="" selected disabled>Pilih no kolam</option>
       </select>
     </div>
@@ -38,23 +68,53 @@
   <div class="ps-3">
     <div class="d-flex flex-column gap-1">
       <label for="status-kesiapan-kolam">Status kesiapan kolam</label>
-      <select class="form-select on-area-change on-farmers-change on-pond-change create-list-on-page-load" id="status-kesiapan-kolam" name="status_kesiapan_kolam" disabled required>
-        <option value="" selected disabled>Pilih status kesiapan kolam untuk tebar</option>
+      <select
+        class="form-select on-area-change on-farmers-change on-pond-change create-list-on-page-load"
+        id="status-kesiapan-kolam"
+        name="status-kesiapan-kolam"
+        disabled
+        required
+      >
+        <option value="" selected disabled>
+          Pilih status kesiapan kolam untuk tebar
+        </option>
       </select>
     </div>
   </div>
   <div class="ps-3">
     <div class="d-flex flex-column gap-1">
-      <label for="status-kesiapan-kolam-lainnya">Isi kolom ini jika status kolam tidak tersedia</label>
-      <input type="text" class="form-control on-area-change on-farmers-change on-pond-change" name="status_kesiapan_kolam_lainnya" id="status-kesiapan-kolam-lainnya" disabled>
+      <label for="status-kesiapan-kolam-lainnya"
+        >Isi kolom ini jika status kolam tidak tersedia</label
+      >
+      <input
+        type="text"
+        class="form-control on-area-change on-farmers-change on-pond-change"
+        name="status-kesiapan-kolam-lainnya"
+        id="status-kesiapan-kolam-lainnya"
+        disabled
+      />
     </div>
   </div>
   <div class="ps-3">
     <div class="d-flex flex-column gap-1">
       <label for="estimasi-siap-tebar">Estimasi waktu kolam siap tebar</label>
       <div class="d-flex gap-2">
-        <input type="number" class="form-control on-area-change on-farmers-change on-pond-change" name="estimasi_siap_tebar" id="estimasi-siap-tebar" min="1" disabled required>
-        <select class="form-select on-area-change on-farmers-change on-pond-change" id="satuan-waktu" name="satuan_waktu" disabled required>
+        <input
+          type="number"
+          class="form-control on-area-change on-farmers-change on-pond-change"
+          name="estimasi-siap-tebar"
+          id="estimasi-siap-tebar"
+          min="1"
+          disabled
+          required
+        />
+        <select
+          class="form-select on-area-change on-farmers-change on-pond-change"
+          id="satuan-waktu"
+          name="satuan-waktu"
+          disabled
+          required
+        >
           <option value="" selected disabled>Pilih satuan waktu</option>
           <option value="hari">Hari</option>
           <option value="minggu">Minggu</option>
@@ -69,5 +129,14 @@
 
 <section class="d-flex flex-column gap-2">
   <label for="foto" class="fw-bolder">Dokumentasi Validasi 2 Kolam KSE</label>
-  <input type="file" class="form-control on-submit-change on-area-change on-pond-change on-farmers-change" name="foto" id="foto" accept="image/*" multiple required disabled>
+  <input
+    type="file"
+    class="form-control on-submit-change on-area-change on-pond-change on-farmers-change"
+    name="foto"
+    id="foto"
+    accept="image/*"
+    multiple
+    required
+    disabled
+  />
 </section>

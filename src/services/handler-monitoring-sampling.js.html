@@ -37,12 +37,18 @@
     try {
       $(window).on("beforeunload", showModalsOnLoading);
       $("#loading-button").hide();
-      preventFormSubmit("form-validasi-2");
+      preventFormSubmit("form-monitoring-sampling");
       createListArea();
       createListOnPageLoad();
       handlingChangeArea();
       handlingChangeFarmersValidasi2();
       handlingChangeStatusKesiapanKolam();
+      setMaxDateToday("#tanggal-cek-sampling");
+      handlingYesOrNoQuestion("#apakah-ada-buyer", ".on-ada-buyer-change");
+      handlingYesOrNoQuestion(
+        "#apakah-siap-panen",
+        ".on-status-siap-panen-change"
+      );
     } catch (err) {
       onFailure(err);
     }

@@ -354,5 +354,23 @@
     }
   }
 
+  function handlingYesOrNoQuestion(questionSelector, fileInputSelector) {
+    const $question = $(questionSelector);
+    const $fileInput = $(fileInputSelector);
+
+    $question.on("change", () => {
+      const isAnswerTrue = $question.val() == 1;
+      $fileInput.prop("required", isAnswerTrue);
+    });
+  }
+
+  function setMaxDateToday(fileInputSelector) {
+    const $fileInput = $(fileInputSelector);
+    const now = new Date();
+    const maxDate = now.toISOString().substring(0, 10);
+
+    $fileInput.prop("max", maxDate);
+  }
+
   // end of DOM FUNCTION section
 </script>

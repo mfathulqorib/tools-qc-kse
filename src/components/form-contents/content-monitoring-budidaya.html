@@ -11,7 +11,7 @@
   <select
     class="form-select"
     id="list-petani"
-    name="list_petani"
+    name="list-petani"
     disabled
     required
   >
@@ -36,7 +36,7 @@
   <input
     type="text"
     class="form-control on-area-change on-farmers-change"
-    name="lead_id"
+    name="lead-id"
     id="lead-id"
     placeholder="Pilih list petani terlebih dahulu"
     readonly="readonly"
@@ -49,7 +49,7 @@
   <select
     class="form-select on-area-change on-farmers-change"
     id="nomor-kolam"
-    name="nomor_kolam"
+    name="nomor-kolam"
     disabled
     required
   >
@@ -61,7 +61,7 @@
 
 <section class="d-flex flex-column gap-2">
   <div class="d-flex flex-column gap-2">
-    <p class="fw-bolder m-0">Data Monitroring Budidaya</p>
+    <p class="fw-bolder m-0">Data Monitoring Budidaya</p>
   </div>
   <div class="ps-3">
     <div class="d-flex flex-column gap-1">
@@ -69,7 +69,7 @@
       <input
         type="date"
         class="form-control on-area-change on-farmers-change"
-        name="tanggal_cek_budidaya"
+        name="tanggal-cek-budidaya"
         id="tanggal-cek-budidaya"
         disabled
         required
@@ -82,7 +82,7 @@
       <select
         class="form-select on-area-change on-farmers-change on-pond-change create-list-on-page-load"
         id="kondisi-budidaya"
-        name="kondisi_budidaya"
+        name="kondisi-budidaya"
         disabled
         required
       >
@@ -98,7 +98,7 @@
       <select
         class="form-select on-area-change on-farmers-change on-pond-change yes-or-no-option"
         id="apakah-ada-kematian"
-        name="apakah_ada_kematian"
+        name="apakah-ada-kematian"
         disabled
         required
       ></select>
@@ -111,7 +111,7 @@
         <input
           type="number"
           class="form-control on-area-change on-farmers-change on-pond-change"
-          name="jumlah_kematian_ikan"
+          name="jumlah-kematian-ikan"
           id="jumlah-kematian-ikan"
           min="1"
           disabled
@@ -120,7 +120,7 @@
         <select
           class="form-select on-area-change on-farmers-change on-pond-change"
           id="satuan-kuantitas"
-          name="satuan_kuantitas"
+          name="satuan-kuantitas"
           disabled
           required
         >
@@ -139,10 +139,66 @@
       <select
         class="form-select on-area-change on-farmers-change on-pond-change yes-or-no-option"
         id="apakah-mencatat-pakan"
-        name="apakah_mencatat_pakan"
+        name="apakah-mencatat-pakan"
         disabled
         required
       ></select>
+    </div>
+  </div>
+  <div class="ps-3">
+    <div class="d-flex flex-column gap-1">
+      <label for="suhu">Suhu (°C)</label>
+      <input
+        type="number"
+        class="form-control on-area-change on-farmers-change on-pond-change"
+        name="suhu"
+        id="suhu"
+        step="0.01"
+        min="0"
+        disabled
+      />
+    </div>
+  </div>
+  <div class="ps-3">
+    <div class="d-flex flex-column gap-1">
+      <label for="dissolved-oxygen">DO (mg/L)</label>
+      <input
+        type="number"
+        class="form-control on-area-change on-farmers-change on-pond-change"
+        name="dissolved-oxygen"
+        id="dissolved-oxygen"
+        step="0.01"
+        min="0"
+        disabled
+      />
+    </div>
+  </div>
+  <div class="ps-3">
+    <div class="d-flex flex-column gap-1">
+      <label for="ph">pH</label>
+      <input
+        type="number"
+        class="form-control on-area-change on-farmers-change on-pond-change"
+        name="ph"
+        id="ph"
+        step="0.01"
+        min="0"
+        disabled
+      />
+    </div>
+  </div>
+  <div class="ps-3">
+    <div class="d-flex flex-column gap-1">
+      <label for="tds">TDS (ppm)</label>
+      <input
+        type="number"
+        class="form-control on-area-change on-farmers-change on-pond-change"
+        name="tds"
+        id="tds"
+        step="0.01"
+        min="0"
+        disabled
+      />
     </div>
   </div>
   <div class="my-1">
@@ -174,14 +230,13 @@
     <input
       type="file"
       class="form-control on-submit-change on-area-change on-pond-change on-farmers-change"
-      name="foto_kematian"
+      name="foto-kematian"
       id="foto-kematian"
       accept="image/*"
       multiple
       disabled
     />
   </div>
-
   <div class="d-flex flex-column gap-1">
     <label for="foto-bencana-alam" class="fw-bolder"
       >Dokumentasi Bencana Alam</label
@@ -192,14 +247,13 @@
     <input
       type="file"
       class="form-control on-submit-change on-area-change on-pond-change on-farmers-change"
-      name="foto_bencana_alam"
+      name="foto-bencana-alam"
       id="foto-bencana-alam"
       accept="image/*"
       multiple
       disabled
     />
   </div>
-
   <div class="d-flex flex-column gap-1">
     <label for="foto-logbook-pakan" class="fw-bolder"
       >Dokumentasi Logbook Pakan</label
@@ -210,14 +264,13 @@
     <input
       type="file"
       class="form-control on-submit-change on-area-change on-pond-change on-farmers-change"
-      name="foto_logbook_pakan"
+      name="foto-logbook-pakan"
       id="foto-logbook-pakan"
       accept="image/*"
       multiple
       disabled
     />
   </div>
-
   <div class="d-flex flex-column gap-1">
     <label for="foto" class="fw-bolder">Dokumentasi Bukti Visit</label>
     <p class="form-text m-0">Upload foto bukti kunjungan monitoring budidaya</p>

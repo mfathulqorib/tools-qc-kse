@@ -47,6 +47,7 @@ function getNavbar(page) {
     "mode=monitoring-stok-pakan"
   );
   const scriptURLMonitoringBudidaya = getScriptURL("mode=monitoring-budidaya");
+  const scriptURLMonitoringSampling = getScriptURL("mode=monitoring-sampling");
 
   const navLinks = [
     {
@@ -78,6 +79,11 @@ function getNavbar(page) {
       text: "Monitoring Budidaya",
       url: scriptURLMonitoringBudidaya,
       isActive: page === "monitoring-budidaya",
+    },
+    {
+      text: "Monitoring Sampling",
+      url: scriptURLMonitoringSampling,
+      isActive: page === "monitoring-sampling",
     },
   ];
 
@@ -230,7 +236,7 @@ function uploadData(formData) {
     .filter(String).length;
   const lastRowSheetAssessment = sheetAssessmentKolam.getLastRow();
   const lastColumnSheetAssessment = sheetAssessmentKolam.getLastColumn();
-  const { lead_id: leadId, nomor_kolam: pondNumber } = formData;
+  const { "lead-id": leadId, "nomor-kolam": pondNumber } = formData;
   const pondId = `${leadId}${"0".repeat(
     4 - pondNumber?.toString().length
   )}${pondNumber}`;
@@ -243,7 +249,7 @@ function uploadData(formData) {
       ...activePage.orderedKeyUploadData.map((key) => {
         if (key.match(/^numeric/i)) {
           return formData[key]?.toString().replace(",", "") || "-";
-        } else if (key === "pond_id") {
+        } else if (key === "pond-id") {
           return pondId || "-";
         } else if (key.match(/^setFormula/i)) {
           return;

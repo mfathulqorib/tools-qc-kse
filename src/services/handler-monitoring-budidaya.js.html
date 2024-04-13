@@ -111,24 +111,6 @@
     });
   }
 
-  function handlingQuestionLogbookPakan() {
-    const $apakahMencatatPakan = $("#apakah-mencatat-pakan");
-    const $fotoLogbookPakan = $("#foto-logbook-pakan");
-
-    $apakahMencatatPakan.on("change", () => {
-      const isMencatatPakan = $apakahMencatatPakan.val() == 1;
-      $fotoLogbookPakan.prop("required", isMencatatPakan);
-    });
-  }
-
-  function setDateInputValidation() {
-    const $tanggalPengecekan = $("#tanggal-cek-budidaya");
-    const now = new Date();
-    const maxDate = now.toISOString().substring(0, 10);
-
-    $tanggalPengecekan.prop("max", maxDate);
-  }
-
   function functionInit() {
     try {
       $(window).on("beforeunload", showModalsOnLoading);
@@ -139,7 +121,8 @@
       handlingChangeArea();
       handlingChangeFarmersValidasi2();
       handlingQuestionLogbookPakan();
-      setDateInputValidation();
+      setMaxDateToday("#tanggal-cek-budidaya");
+      handlingYesOrNoQuestion("#apakah-mencatat-pakan", "#foto-logbook-pakan");
     } catch (err) {
       onFailure(err);
     }

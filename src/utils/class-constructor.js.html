@@ -1,11 +1,10 @@
 <script>
-class SkuManager {
+  class SkuManager {
     constructor() {
-        this.skus = [];
-        this.skuCount = 1;
-        this.maxSkus = 4;
+      this.skuCount = 1;
+      this.maxSkus = 4;
     }
-    
+
     addSKU() {
       if (this.skuCount < this.maxSkus) {
         this.skuCount++;
@@ -13,76 +12,128 @@ class SkuManager {
         const skuElement = this.createSKUElement(this.skuCount);
         const qtyElement = this.createQtyElement(this.skuCount);
         const qtyOpenElement = this.createQtyOpenElement(this.skuCount);
-        const separatorContainer = $('<div>', { class: 'ps-3 additional-sku deleted-after-submit'});
-        const separator = $('<hr>', { class: 'hr border-3 my-2 additional-sku deleted-after-submit' });
-        const $listSKUPakan = $('#list-sku-pakan');
-        
-        separatorContainer.append(separator)
-        
+        const separatorContainer = $("<div>", {
+          class: "ps-3 additional-sku deleted-after-submit",
+        });
+        const separator = $("<hr>", {
+          class: "hr border-3 my-2 additional-sku deleted-after-submit",
+        });
+        const $listSKUPakan = $("#list-sku-pakan");
+
+        separatorContainer.append(separator);
+
         $listSKUPakan
-        .prop('hidden', false)
-        .append(skuElement, qtyElement, qtyOpenElement, separatorContainer);
-        
+          .prop("hidden", false)
+          .append(skuElement, qtyElement, qtyOpenElement, separatorContainer);
+
         this.createSkuDropdown(this.skuCount);
       }
     }
-  
+
     createSKUElement(skuCount) {
-      const skuContainer = $('<div>', { class: 'd-flex flex-column gap-1 ps-3 additional-sku deleted-after-submit' });
-      const skuLabel = $('<label>', { for: `sku-pakan-${skuCount}`, text: `SKU Pakan ${skuCount}` });
-      const skuSelect = $('<select>', { id: `sku-pakan-${skuCount}`, class: 'form-select', name: `sku_pakan_${skuCount}` });
-      const defaultOption = $('<option>', { disabled: true, selected: true, value: '', text: 'Pilih SKU pakan sebelum mengisi stok pakan' });
-      
+      const skuContainer = $("<div>", {
+        class:
+          "d-flex flex-column gap-1 ps-3 additional-sku deleted-after-submit",
+      });
+      const skuLabel = $("<label>", {
+        for: `sku-pakan-${skuCount}`,
+        text: `SKU Pakan ${skuCount}`,
+      });
+      const skuSelect = $("<select>", {
+        id: `sku-pakan-${skuCount}`,
+        class: "form-select",
+        name: `sku-pakan-${skuCount}`,
+      });
+      const defaultOption = $("<option>", {
+        disabled: true,
+        selected: true,
+        value: "",
+        text: "Pilih SKU pakan sebelum mengisi stok pakan",
+      });
+
       skuSelect.append(defaultOption);
       skuContainer.append(skuLabel, skuSelect);
-      
+
       return skuContainer;
     }
-  
+
     createQtyElement(skuCount) {
-      const qtyContainer = $('<div>', { class: 'd-flex flex-column gap-1 ps-3 additional-sku deleted-after-submit' });
-      const qtyLabel = $('<label>', { for: `qty-pakan-${skuCount}`, text: `Stok Pakan ${skuCount} (sak)` });
-      const qtyInput = $('<input>', { id: `qty-pakan-${skuCount}`, name: `qty_pakan_${skuCount}`, class: 'form-control gap-2', type: 'number', min: '0', placeholder: 'Jumlah sak utuh yang belum dibuka' });
-      
+      const qtyContainer = $("<div>", {
+        class:
+          "d-flex flex-column gap-1 ps-3 additional-sku deleted-after-submit",
+      });
+      const qtyLabel = $("<label>", {
+        for: `qty-pakan-${skuCount}`,
+        text: `Stok Pakan ${skuCount} (sak)`,
+      });
+      const qtyInput = $("<input>", {
+        id: `qty-pakan-${skuCount}`,
+        name: `qty-pakan-${skuCount}`,
+        class: "form-control gap-2",
+        type: "number",
+        min: "0",
+        placeholder: "Jumlah sak utuh yang belum dibuka",
+      });
+
       qtyContainer.append(qtyLabel, qtyInput);
-      
+
       return qtyContainer;
     }
-  
+
     createQtyOpenElement(skuCount) {
-      const qtyOpenContainer = $('<div>', { class: 'd-flex flex-column gap-1 ps-3 additional-sku deleted-after-submit' });
-      const qtyOpenLabel = $('<label>', { for: `qty-pakan-${skuCount}-open`, text: `Stok Pakan ${skuCount} (kg)` });
-      const qtyOpenInput = $('<input>', { id: `qty-pakan-${skuCount}-open`, name: `qty_pakan_${skuCount}_open`, class: 'form-control', type: 'number', min: '0', step: '0.1', placeholder: 'Sisa kg isi sak pakan yang sudah dibuka' });
-      
+      const qtyOpenContainer = $("<div>", {
+        class:
+          "d-flex flex-column gap-1 ps-3 additional-sku deleted-after-submit",
+      });
+      const qtyOpenLabel = $("<label>", {
+        for: `qty-pakan-${skuCount}-open`,
+        text: `Stok Pakan ${skuCount} (kg)`,
+      });
+      const qtyOpenInput = $("<input>", {
+        id: `qty-pakan-${skuCount}-open`,
+        name: `qty-pakan-${skuCount}-open`,
+        class: "form-control",
+        type: "number",
+        min: "0",
+        step: "0.1",
+        placeholder: "Sisa kg isi sak pakan yang sudah dibuka",
+      });
+
       qtyOpenContainer.append(qtyOpenLabel, qtyOpenInput);
-      
+
       return qtyOpenContainer;
     }
-  
+
     createSkuDropdown(skuCount) {
       google.script.run
-        .withSuccessHandler((values) => this.populateSkuDropdown(values, skuCount))
+        .withSuccessHandler((values) =>
+          this.populateSkuDropdown(values, skuCount)
+        )
         .withFailureHandler(onFailure)
         .getListSkuPakan();
     }
-  
+
     populateSkuDropdown(values, skuCount) {
       const $skuSelect = $(`#sku-pakan-${skuCount}`);
-    
+
       this.hideSpinner();
-    
+
       values.forEach((value) => {
-        const option = $('<option>', { value, text: value });
+        const option = $("<option>", { value, text: value });
         $skuSelect.append(option);
       });
     }
-  
+
     showSpinner() {
-      $('#spinnerModal').modal('show');
+      $("#spinnerModal").modal("show");
     }
-  
+
     hideSpinner() {
-      $('#spinnerModal').modal('hide');
+      $("#spinnerModal").modal("hide");
     }
+  }
+
+  class pondManager {
+    constructor() {}
   }
 </script>
