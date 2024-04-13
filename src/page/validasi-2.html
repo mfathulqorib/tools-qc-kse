@@ -1,32 +1,45 @@
 <!DOCTYPE html>
 <html>
-<script>
-  if (window.trustedTypes && window.trustedTypes.createPolicy) {
-    window.trustedTypes.createPolicy('default', {
-      createHTML: string => string,
-      createScriptURL: string => string,
-      createScript: string => string,
-    });
-  }
-</script>
-<head>
-  <base target="_top">
-  <?!= includeStyle('global.css'); ?>  
-</head>
+  <script>
+    if (window.trustedTypes && window.trustedTypes.createPolicy) {
+      window.trustedTypes.createPolicy("default", {
+        createHTML: (string) => string,
+        createScriptURL: (string) => string,
+        createScript: (string) => string,
+      });
+    }
+  </script>
+  <head>
+    <base target="_top" />
+    <?!= includeStyle('global.css'); ?>
+  </head>
   <body>
     {{NAVBAR}}
     <main>
-      <?!= includeTitle('title-validasi-2'); ?>   
+      <?!= includeTitle('title-validasi-2'); ?>
 
-      <form id="form-validasi-2" class="py-3 px-4 d-flex flex-column gap-3" onsubmit="handleFormSubmit(this)">
+      <form
+        id="form-validasi-2"
+        class="py-3 px-4 d-flex flex-column gap-3"
+        onsubmit="handleFormSubmit(this)"
+      >
         <?!= includeFormContent('content-validasi-2'); ?>
 
-        <button type="submit" class="btn btn-primary btn-block" value="Submit" id="submit-button-validasi-2">
-          <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true" id="loading-button"></span>
+        <button
+          type="submit"
+          class="btn btn-primary btn-block"
+          value="Submit"
+          id="submit-button"
+        >
+          <span
+            class="spinner-border spinner-border-sm me-1"
+            role="status"
+            aria-hidden="true"
+            id="loading-button"
+          ></span>
           Submit
         </button>
       </form>
-
     </main>
   </body>
   <?!= includeComponent('assets'); ?>

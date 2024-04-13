@@ -8,31 +8,73 @@
 </div>
 <div class="d-flex flex-column gap-1">
   <label for="list-petani">List petani</label>
-  <select class="form-select" id="list-petani" name="list_petani" disabled required>
+  <select
+    class="form-select"
+    id="list-petani"
+    name="list-petani"
+    disabled
+    required
+  >
     <option value="" selected disabled>Pilih petani</option>
   </select>
 </div>
 <div class="d-flex flex-column gap-1">
   <label for="nama">Nama petani</label>
-  <input type="text" class="form-control on-area-change on-farmers-change" name="nama" id="nama" placeholder="Pilih list petani terlebih dahulu" readonly="readonly" disabled>
+  <input
+    type="text"
+    class="form-control on-area-change on-farmers-change"
+    name="nama"
+    id="nama"
+    placeholder="Pilih list petani terlebih dahulu"
+    readonly="readonly"
+    disabled
+  />
 </div>
 <div class="d-flex flex-column gap-1">
   <label for="lead-id">Lead id</label>
-  <input type="text" class="form-control on-area-change on-farmers-change" name="lead_id" id="lead-id" placeholder="Pilih list petani terlebih dahulu" readonly="readonly" disabled>
+  <input
+    type="text"
+    class="form-control on-area-change on-farmers-change"
+    name="lead-id"
+    id="lead-id"
+    placeholder="Pilih list petani terlebih dahulu"
+    readonly="readonly"
+    disabled
+  />
 </div>
 <div class="d-flex flex-column gap-1">
   <label for="nomor-kolam">Nomor kolam</label>
-  <input type="number" class="form-control on-area-change on-farmers-change" name="nomor_kolam" id="nomor-kolam" max="9999" required disabled>
+  <input
+    type="number"
+    class="form-control on-area-change on-farmers-change"
+    name="nomor-kolam"
+    id="nomor-kolam"
+    max="9999"
+    required
+    disabled
+  />
 </div>
 <div class="d-flex flex-column gap-1">
   <label for="jenis-kolam">Jenis kolam</label>
-  <select class="form-select on-area-change on-farmers-change on-pond-change create-list-on-page-load" id="jenis-kolam" name="jenis_kolam" required disabled>
+  <select
+    class="form-select on-area-change on-farmers-change on-pond-change create-list-on-page-load"
+    id="jenis-kolam"
+    name="jenis-kolam"
+    required
+    disabled
+  >
     <option value="" selected disabled>Pilih jenis kolam</option>
   </select>
 </div>
 <div class="d-flex flex-column gap-1">
   <label for="komoditas">Komoditas yang diajukan</label>
-  <select class="form-select on-area-change on-farmers-change on-pond-change create-list-on-page-load" id="komoditas" name="komoditas" required disabled>
+  <select
+    class="form-select on-area-change on-farmers-change on-pond-change create-list-on-page-load"
+    id="komoditas"
+    name="komoditas"
+    required
+    disabled
+  >
     <option value="" selected disabled>Pilih komoditas</option>
   </select>
 </div>
@@ -42,30 +84,64 @@
 <section class="d-flex flex-column gap-2">
   <div class="d-flex flex-column">
     <p class="fw-bolder m-0">Data Kualitas Air</p>
-    <p class="form-text mt-0 mb-1">Maksimal 2 angka dibelakang koma untuk isian data kualitas air</p>
+    <p class="form-text mt-0 mb-1">
+      Maksimal 2 angka dibelakang koma untuk isian data kualitas air
+    </p>
   </div>
   <div class="ps-3">
     <div class="d-flex flex-column gap-1">
       <label for="suhu">Suhu (°C)</label>
-      <input type="number" class="form-control on-area-change on-farmers-change on-pond-change" name="suhu" id="suhu" step="0.01" disabled>
+      <input
+        type="number"
+        class="form-control on-area-change on-farmers-change on-pond-change"
+        name="suhu"
+        id="suhu"
+        step="0.01"
+        min="0"
+        disabled
+      />
     </div>
   </div>
   <div class="ps-3">
     <div class="d-flex flex-column gap-1">
       <label for="dissolved-oxygen">DO (mg/L)</label>
-      <input type="number" class="form-control on-area-change on-farmers-change on-pond-change" name="dissolved_oxygen" id="dissolved-oxygen" step="0.01" disabled>
+      <input
+        type="number"
+        class="form-control on-area-change on-farmers-change on-pond-change"
+        name="dissolved-oxygen"
+        id="dissolved-oxygen"
+        step="0.01"
+        min="0"
+        disabled
+      />
     </div>
   </div>
   <div class="ps-3">
     <div class="d-flex flex-column gap-1">
       <label for="ph">pH</label>
-      <input type="number" class="form-control on-area-change on-farmers-change on-pond-change" name="ph" id="ph" step="0.01" disabled>
+      <input
+        type="number"
+        class="form-control on-area-change on-farmers-change on-pond-change"
+        name="ph"
+        id="ph"
+        step="0.01"
+        min="0"
+        disabled
+      />
     </div>
   </div>
   <div class="ps-3">
     <div class="d-flex flex-column gap-1">
       <label for="tds">TDS (ppm)</label>
-      <input type="number" class="form-control on-area-change on-farmers-change on-pond-change" name="tds" id="tds" step="0.01" disabled>
+      <input
+        type="number"
+        class="form-control on-area-change on-farmers-change on-pond-change"
+        name="tds"
+        id="tds"
+        step="0.01"
+        min="0"
+        disabled
+      />
     </div>
   </div>
 </section>
@@ -75,33 +151,69 @@
 <section class="d-flex flex-column gap-2">
   <div class="d-flex flex-column">
     <p class="fw-bolder m-0">Data Kolam dan Tebaran</p>
-    <p class="form-text mt-0 mb-1">Maksimal 2 angka dibelakang koma untuk isian data luas kolam dan tebaran</p>
+    <p class="form-text mt-0 mb-1">
+      Maksimal 2 angka dibelakang koma untuk isian data luas kolam dan tebaran
+    </p>
   </div>
   <div class="ps-3">
     <div class="d-flex flex-column gap-1">
       <label for="lokasi-kolam">Lokasi kolam</label>
       <div class="d-flex gap-2">
-        <div class="btn btn-secondary" onclick="getLocation()"><i class="bi bi-crosshair"></i></div>
-        <input type="text" class="form-control on-area-change on-farmers-change on-pond-change" name="lokasi_kolam" id="lokasi-kolam" placeholder="Tekan tombol disamping kiri untuk mendapatkan link lokasi kolam" disabled>
+        <div class="btn btn-secondary" onclick="getLocation()">
+          <i class="bi bi-crosshair"></i>
+        </div>
+        <input
+          type="text"
+          class="form-control on-area-change on-farmers-change on-pond-change"
+          name="lokasi-kolam"
+          id="lokasi-kolam"
+          placeholder="Tekan tombol disamping kiri untuk mendapatkan link lokasi kolam"
+          disabled
+        />
       </div>
     </div>
   </div>
   <div class="ps-3">
     <div class="d-flex flex-column gap-1">
       <label for="luas">Luas (m2)</label>
-      <input type="number" class="form-control on-area-change on-farmers-change on-pond-change" name="luas" id="luas" step="0.01" required disabled>
+      <input
+        type="number"
+        class="form-control on-area-change on-farmers-change on-pond-change"
+        name="luas"
+        id="luas"
+        step="0.01"
+        min="0"
+        required
+        disabled
+      />
     </div>
   </div>
   <div class="ps-3">
     <div class="d-flex flex-column gap-1">
       <label for="kedalaman">Kedalaman (m)</label>
-      <input type="number" class="form-control on-area-change on-farmers-change on-pond-change" name="kedalaman" id="kedalaman" step="0.01" min="0" max="5" required disabled>
+      <input
+        type="number"
+        class="form-control on-area-change on-farmers-change on-pond-change"
+        name="kedalaman"
+        id="kedalaman"
+        step="0.01"
+        min="0"
+        max="5"
+        required
+        disabled
+      />
     </div>
   </div>
   <div class="ps-3">
     <div class="d-flex flex-column gap-1">
       <label for="sumber-air">Sumber air</label>
-      <select class="form-select on-area-change on-farmers-change on-pond-change create-list-on-page-load" id="sumber-air" name="sumber_air" required disabled>
+      <select
+        class="form-select on-area-change on-farmers-change on-pond-change create-list-on-page-load"
+        id="sumber-air"
+        name="sumber-air"
+        required
+        disabled
+      >
         <option value="" selected disabled>Pilih sumber air</option>
       </select>
     </div>
@@ -109,7 +221,13 @@
   <div class="ps-3">
     <div class="d-flex flex-column gap-1">
       <label for="debit-air">Debit air</label>
-      <select class="form-select on-area-change on-farmers-change on-pond-change create-list-on-page-load" id="debit-air" name="debit_air" required disabled>
+      <select
+        class="form-select on-area-change on-farmers-change on-pond-change create-list-on-page-load"
+        id="debit-air"
+        name="debit-air"
+        required
+        disabled
+      >
         <option value="" selected disabled>Pilih kategori debit air</option>
       </select>
     </div>
@@ -117,7 +235,13 @@
   <div class="ps-3">
     <div class="d-flex flex-column gap-1">
       <label for="sumber-benih">Sumber benih yang akan digunakan</label>
-      <select class="form-select on-area-change on-farmers-change on-pond-change create-list-on-page-load" id="sumber-benih" name="sumber_benih" required disabled>
+      <select
+        class="form-select on-area-change on-farmers-change on-pond-change create-list-on-page-load"
+        id="sumber-benih"
+        name="sumber-benih"
+        required
+        disabled
+      >
         <option value="" selected disabled>Pilih sumber benih</option>
       </select>
     </div>
@@ -125,28 +249,58 @@
   <div class="ps-3">
     <div class="d-flex flex-column gap-1">
       <label for="padat-tebar">Maksimal Padat Tebar (ekor/m3)</label>
-      <input type="number" class="form-control on-area-change on-farmers-change on-pond-change" name="padat_tebar" id="padat-tebar" step="0.01" required disabled>
+      <input
+        type="number"
+        class="form-control on-area-change on-farmers-change on-pond-change"
+        name="padat-tebar"
+        id="padat-tebar"
+        step="0.01"
+        min="0"
+        required
+        disabled
+      />
     </div>
   </div>
   <div class="ps-3">
     <div class="d-flex flex-column gap-1">
-      <label for="apakah-kolam-kosong">Apakah kolam dalam kondisi kosong belum diisi ikan? </label>
-      <select class="form-select on-area-change on-farmers-change on-pond-change yes-or-no-option" id="apakah-kolam-kosong" name="apakah_kolam_kosong" required disabled>
-      </select>
+      <label for="apakah-kolam-kosong"
+        >Apakah kolam dalam kondisi kosong belum diisi ikan?
+      </label>
+      <select
+        class="form-select on-area-change on-farmers-change on-pond-change yes-or-no-option"
+        id="apakah-kolam-kosong"
+        name="apakah-kolam-kosong"
+        required
+        disabled
+      ></select>
     </div>
   </div>
   <div class="ps-3">
     <div class="d-flex flex-column gap-1">
-      <label for="apakah-ada-listrik">Apakah ada akses listrik di kolam? </label>
-      <select class="form-select on-area-change on-farmers-change on-pond-change yes-or-no-option" id="apakah-ada-listrik" name="apakah_ada_listrik" required disabled>
-      </select>
+      <label for="apakah-ada-listrik"
+        >Apakah ada akses listrik di kolam?
+      </label>
+      <select
+        class="form-select on-area-change on-farmers-change on-pond-change yes-or-no-option"
+        id="apakah-ada-listrik"
+        name="apakah-ada-listrik"
+        required
+        disabled
+      ></select>
     </div>
   </div>
   <div class="ps-3">
     <div class="d-flex flex-column gap-1">
-      <label for="apakah-pasang-feeder">Apakah kolam ingin dipasang feeder? </label>
-      <select class="form-select on-area-change on-farmers-change on-pond-change yes-or-no-option" id="apakah-pasang-feeder" name="apakah_pasang_feeder" required disabled>
-      </select>
+      <label for="apakah-pasang-feeder"
+        >Apakah kolam ingin dipasang feeder?
+      </label>
+      <select
+        class="form-select on-area-change on-farmers-change on-pond-change yes-or-no-option"
+        id="apakah-pasang-feeder"
+        name="apakah-pasang-feeder"
+        required
+        disabled
+      ></select>
     </div>
   </div>
 </section>
@@ -156,21 +310,41 @@
 <section class="d-flex flex-column gap-2">
   <div class="d-flex flex-column">
     <p class="fw-bolder m-0">Data Historikal Budidaya</p>
-    <p class="form-text mt-0 mb-1">Maksimal 1 angka dibelakang koma untuk isian data historikal budidaya</p>
+    <p class="form-text mt-0 mb-1">
+      Maksimal 1 angka dibelakang koma untuk isian data historikal budidaya
+    </p>
   </div>
   <div class="ps-3">
     <div class="d-flex flex-column gap-1">
       <label for="historikal-siklus">Berapa lama kolam dipakai budidaya</label>
-      <select class="form-select on-area-change on-farmers-change on-pond-change create-list-on-page-load" id="historikal-siklus" name="hystorical_pond_cycle" required disabled>
-        <option value="" selected disabled>Pilih kategori historikal siklus</option>
+      <select
+        class="form-select on-area-change on-farmers-change on-pond-change create-list-on-page-load"
+        id="historikal-siklus"
+        name="hystorical-pond-cycle"
+        required
+        disabled
+      >
+        <option value="" selected disabled>
+          Pilih kategori historikal siklus
+        </option>
       </select>
     </div>
   </div>
   <div class="ps-3">
     <div class="d-flex flex-column gap-1">
-      <label for="historikal-komoditas">Komoditas yang dibudidayakan siklus sebelumnya</label>
-      <select class="form-select on-area-change on-farmers-change on-pond-change create-list-on-page-load" id="historikal-komoditas" name="hystorical_pond_commodity" required disabled>
-        <option value="" selected disabled>Pilih komoditas siklus sebelumnya</option>
+      <label for="historikal-komoditas"
+        >Komoditas yang dibudidayakan siklus sebelumnya</label
+      >
+      <select
+        class="form-select on-area-change on-farmers-change on-pond-change create-list-on-page-load"
+        id="historikal-komoditas"
+        name="hystorical-pond-commodity"
+        required
+        disabled
+      >
+        <option value="" selected disabled>
+          Pilih komoditas siklus sebelumnya
+        </option>
       </select>
     </div>
   </div>
@@ -178,11 +352,20 @@
     <div class="d-flex flex-column gap-1">
       <label for="historikal-tebaran">Tebaran siklus sebelumnya</label>
       <div class="d-flex gap-2">
-        <input type="text" class="form-control on-area-change on-farmers-change on-pond-change numeric-input" name="numeric_historikal_tebaran" id="historikal-tebaran" disabled>
-        <select class="form-select on-area-change on-farmers-change on-pond-change create-list-on-page-load" id="satuan-tebaran" name="satuan_tebaran" disabled>
+        <input
+          type="text"
+          class="form-control on-area-change on-farmers-change on-pond-change numeric-input"
+          name="numeric-historikal-tebaran"
+          id="historikal-tebaran"
+          disabled
+        />
+        <select
+          class="form-select on-area-change on-farmers-change on-pond-change create-list-on-page-load"
+          id="satuan-tebaran"
+          name="satuan-tebaran"
+          disabled
+        >
           <option value="" selected disabled>Pilih satuan tebaran</option>
-          <option value="ekor">ekor</option>
-          <option value="kg">kg</option>
         </select>
       </div>
     </div>
@@ -190,13 +373,28 @@
   <div class="ps-3">
     <div class="d-flex flex-column gap-1">
       <label for="historikal-panen">Hasil panen siklus sebelumnya (kg)</label>
-      <input type="text" class="form-control on-area-change on-farmers-change on-pond-change numeric-input" name="numeric_historikal_panen" id="historikal-panen" disabled>
+      <input
+        type="text"
+        class="form-control on-area-change on-farmers-change on-pond-change numeric-input"
+        name="numeric-historikal-panen"
+        id="historikal-panen"
+        disabled
+      />
     </div>
   </div>
   <div class="ps-3">
     <div class="d-flex flex-column gap-1">
       <label for="historikal-panen">Lama DOC siklus sebelumnya (bulan)</label>
-      <input type="number" class="form-control on-area-change on-farmers-change on-pond-change" name="historikal_doc" id="historikal-doc" step="0.1" min="1" max="12" disabled>
+      <input
+        type="number"
+        class="form-control on-area-change on-farmers-change on-pond-change"
+        name="historikal-doc"
+        id="historikal-doc"
+        step="0.1"
+        min="0"
+        max="12"
+        disabled
+      />
     </div>
   </div>
 </section>
@@ -210,51 +408,100 @@
   <div class="ps-3">
     <div class="d-flex flex-column gap-1">
       <label for="farmer-status">Status petani</label>
-      <select class="form-select on-area-change on-farmers-change on-pond-change create-list-on-page-load" id="farmer-status" name="farmer_status" disabled required>
+      <select
+        class="form-select on-area-change on-farmers-change on-pond-change create-list-on-page-load"
+        id="farmer-status"
+        name="farmer-status"
+        disabled
+        required
+      >
         <option value="" selected disabled>Pilih status petani</option>
       </select>
     </div>
   </div>
   <div class="ps-3">
     <div class="d-flex flex-column gap-1">
-      <label for="apakah-koperatif">Apakah petani koperatif selama pengecekan kolam</label>
-      <select class="form-select on-area-change on-farmers-change on-pond-change yes-or-no-option" id="apakah-koperatif" name="apakah_koperatif" required disabled>
-      </select>
+      <label for="apakah-koperatif"
+        >Apakah petani koperatif selama pengecekan kolam</label
+      >
+      <select
+        class="form-select on-area-change on-farmers-change on-pond-change yes-or-no-option"
+        id="apakah-koperatif"
+        name="apakah-koperatif"
+        required
+        disabled
+      ></select>
     </div>
   </div>
   <div class="ps-3">
     <div class="d-flex flex-column gap-1">
-      <label for="apakah-ada-kandang-hewan">Apakah terdapat kadang hewan aktif diatas kolam</label>
-      <select class="form-select on-area-change on-farmers-change on-pond-change yes-or-no-option" id="apakah-ada-kandang-hewan" name="apakah_ada_kandang_hewan" required disabled>
-      </select>
+      <label for="apakah-ada-kandang-hewan"
+        >Apakah terdapat kadang hewan aktif diatas kolam</label
+      >
+      <select
+        class="form-select on-area-change on-farmers-change on-pond-change yes-or-no-option"
+        id="apakah-ada-kandang-hewan"
+        name="apakah-ada-kandang-hewan"
+        required
+        disabled
+      ></select>
     </div>
   </div>
   <div class="ps-3">
     <div class="d-flex flex-column gap-1">
-      <label for="apakah-dekat-jurang">Apakah kolam berada di pinggir sungai/jurang/tebing </label>
-      <select class="form-select on-area-change on-farmers-change on-pond-change yes-or-no-option" id="apakah-dekat-jurang" name="apakah_dekat_jurang" required disabled>
-      </select>
+      <label for="apakah-dekat-jurang"
+        >Apakah kolam berada di pinggir sungai/jurang/tebing
+      </label>
+      <select
+        class="form-select on-area-change on-farmers-change on-pond-change yes-or-no-option"
+        id="apakah-dekat-jurang"
+        name="apakah-dekat-jurang"
+        required
+        disabled
+      ></select>
     </div>
   </div>
   <div class="ps-3">
     <div class="d-flex flex-column gap-1">
-      <label for="apakah-banyak-predator">Apakah disekitar kolam banyak predator ikan seperti berang-berang atau biawak? </label>
-      <select class="form-select on-area-change on-farmers-change on-pond-change yes-or-no-option" id="apakah-banyak-predator" name="apakah_banyak_predator" required disabled>
-      </select>
+      <label for="apakah-banyak-predator"
+        >Apakah disekitar kolam banyak predator ikan seperti berang-berang atau
+        biawak?
+      </label>
+      <select
+        class="form-select on-area-change on-farmers-change on-pond-change yes-or-no-option"
+        id="apakah-banyak-predator"
+        name="apakah-banyak-predator"
+        required
+        disabled
+      ></select>
     </div>
   </div>
   <div class="ps-3">
     <div class="d-flex flex-column gap-1">
-      <label for="apakah-dekat-jalan">Apakah kolam dekat dengan jalan akses mobil (maksimal 1km)</label>
-      <select class="form-select on-area-change on-farmers-change on-pond-change yes-or-no-option" id="apakah-dekat-jalan" name="apakah_dekat_jalan" required disabled>
-      </select>
+      <label for="apakah-dekat-jalan"
+        >Apakah kolam dekat dengan jalan akses mobil (maksimal 1km)</label
+      >
+      <select
+        class="form-select on-area-change on-farmers-change on-pond-change yes-or-no-option"
+        id="apakah-dekat-jalan"
+        name="apakah-dekat-jalan"
+        required
+        disabled
+      ></select>
     </div>
   </div>
   <div class="ps-3">
     <div class="d-flex flex-column gap-1">
-      <label for="apakah-dekat-pemukiman">Apakah kolam dekat dengan pemukiman (maksimal 5km)</label>
-      <select class="form-select on-area-change on-farmers-change on-pond-change yes-or-no-option" id="apakah-dekat-pemukiman" name="apakah_dekat_pemukiman" required disabled>
-      </select>
+      <label for="apakah-dekat-pemukiman"
+        >Apakah kolam dekat dengan pemukiman (maksimal 5km)</label
+      >
+      <select
+        class="form-select on-area-change on-farmers-change on-pond-change yes-or-no-option"
+        id="apakah-dekat-pemukiman"
+        name="apakah-dekat-pemukiman"
+        required
+        disabled
+      ></select>
     </div>
   </div>
 </section>
@@ -263,5 +510,14 @@
 
 <section class="d-flex flex-column gap-2">
   <label for="foto" class="fw-bolder">Dokumentasi Validasi 1 Kolam KSE</label>
-  <input type="file" class="form-control on-area-change on-farmers-change on-pond-change" name="foto" id="foto" accept="image/*" multiple required disabled>
+  <input
+    type="file"
+    class="form-control on-area-change on-farmers-change on-pond-change"
+    name="foto"
+    id="foto"
+    accept="image/*"
+    multiple
+    required
+    disabled
+  />
 </section>

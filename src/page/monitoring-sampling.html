@@ -16,14 +16,14 @@
   <body>
     {{NAVBAR}}
     <main>
-      <?!= includeTitle('title-validasi-midway'); ?>
+      <?!= includeTitle('title-monitoring-sampling'); ?>
 
       <form
-        id="form-validasi-midway"
+        id="form-monitoring-sampling"
         class="py-3 px-4 d-flex flex-column gap-3"
         onsubmit="handleFormSubmit(this)"
       >
-        <?!= includeFormContent('content-validasi-midway'); ?>
+        <?!= includeFormContent('content-monitoring-sampling'); ?>
 
         <button
           type="submit"
@@ -44,5 +44,5 @@
   </body>
   <?!= includeComponent('assets'); ?>
   <?!= includeUtils('utils.js'); ?>
-  <?!= includeService('handler-validasi-midway.js'); ?>
+  <?!= includeService('handler-monitoring-sampling.js'); ?>
 </html>

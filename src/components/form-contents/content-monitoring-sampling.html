@@ -1,0 +1,203 @@
+<!-- Farmers Information -->
+
+<div class="d-flex flex-column gap-1">
+  <label for="area">Area</label>
+  <select class="form-select" id="area" name="area" required>
+    <option value="" selected disabled>Pilih area</option>
+  </select>
+</div>
+<div class="d-flex flex-column gap-1">
+  <label for="list-petani">List petani</label>
+  <select
+    class="form-select"
+    id="list-petani"
+    name="list-petani"
+    disabled
+    required
+  >
+    <option value="" selected disabled>Pilih petani</option>
+  </select>
+</div>
+<div class="d-flex flex-column gap-1">
+  <label for="nama">Nama petani</label>
+  <input
+    type="text"
+    class="form-control on-area-change on-farmers-change"
+    name="nama"
+    id="nama"
+    placeholder="Pilih list petani terlebih dahulu"
+    readonly="readonly"
+    disabled
+    required
+  />
+</div>
+<div class="d-flex flex-column gap-1">
+  <label for="lead-id">Lead id</label>
+  <input
+    type="text"
+    class="form-control on-area-change on-farmers-change"
+    name="lead-id"
+    id="lead-id"
+    placeholder="Pilih list petani terlebih dahulu"
+    readonly="readonly"
+    disabled
+    required
+  />
+</div>
+<div class="d-flex flex-column gap-1">
+  <label for="nomor-kolam">Nomor kolam</label>
+  <select
+    class="form-select on-area-change on-farmers-change"
+    id="nomor-kolam"
+    name="nomor-kolam"
+    disabled
+    required
+  >
+    <option value="" selected disabled>Pilih no kolam</option>
+  </select>
+</div>
+
+<!-- Monitoring Sampling Information -->
+
+<section class="d-flex flex-column gap-2">
+  <div class="d-flex flex-column gap-2">
+    <p class="fw-bolder m-0">Data Monitoring Sampling</p>
+  </div>
+  <div class="ps-3">
+    <div class="d-flex flex-column gap-1">
+      <label for="tanggal-cek-sampling">Tanggal Pengecekan Sampling</label>
+      <input
+        type="date"
+        class="form-control on-area-change on-farmers-change"
+        name="tanggal-cek-sampling"
+        id="tanggal-cek-sampling"
+        disabled
+        required
+      />
+    </div>
+  </div>
+  <div class="ps-3">
+    <div class="d-flex flex-column gap-1">
+      <label for="bobot-sampling-ikan"
+        >Bobot rata-rata ikan hasil sampling (gram)</label
+      >
+      <input
+        type="number"
+        class="form-control on-area-change on-farmers-change on-pond-change"
+        id="bobot-sampling-ikan"
+        name="bobot-sampling-ikan"
+        min="0"
+        step="0.1"
+        disabled
+      />
+    </div>
+  </div>
+  <div class="ps-3">
+    <div class="d-flex flex-column gap-1">
+      <label for="apakah-siap-panen"
+        >Apakah sudah siap panen dalam waktu dekat?</label
+      >
+      <select
+        class="form-select on-area-change on-farmers-change on-pond-change yes-or-no-option"
+        id="apakah-siap-panen"
+        name="apakah-siap-panen"
+        disabled
+        required
+      ></select>
+    </div>
+  </div>
+  <div class="ps-3">
+    <div class="d-flex flex-column gap-1">
+      <label for="estimasi-siap-panen">Estimasi waktu kolam siap panen</label>
+      <div class="d-flex gap-2">
+        <input
+          type="number"
+          class="form-control on-area-change on-farmers-change on-pond-change on-status-siap-panen-change"
+          name="estimasi-siap-panen"
+          id="estimasi-siap-panen"
+          min="0"
+          disabled
+        />
+        <select
+          class="form-select on-area-change on-farmers-change on-pond-change on-status-siap-panen-change"
+          id="satuan-waktu"
+          name="satuan-waktu"
+          disabled
+        >
+          <option value="" selected disabled>Pilih satuan waktu</option>
+          <option value="hari">Hari</option>
+          <option value="minggu">Minggu</option>
+          <option value="bulan">Bulan</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="ps-3">
+    <div class="d-flex flex-column gap-1">
+      <label for="apakah-ada-buyer"
+        >Apakah ada langganan buyer/bakul ikan?</label
+      >
+      <select
+        class="form-select on-area-change on-farmers-change on-pond-change yes-or-no-option"
+        id="apakah-ada-buyer"
+        name="apakah-ada-buyer"
+        disabled
+        required
+      ></select>
+    </div>
+  </div>
+  <div class="ps-3">
+    <div class="d-flex flex-column gap-1">
+      <label for="harga-buyer">Harga beli buyer terakhir (Rp/kg)</label>
+      <input
+        type="text"
+        class="form-control on-area-change on-farmers-change on-pond-change numeric-input on-ada-buyer-change"
+        name="numeric-harga-buyer"
+        id="harga-buyer"
+        disabled
+      />
+    </div>
+  </div>
+  <div class="ps-3">
+    <div class="d-flex flex-column gap-1">
+      <label for="kontak-buyer">Kontak/nomor HP langganan buyer/bakul</label>
+      <input
+        type="text"
+        class="form-control on-area-change on-farmers-change on-pond-change on-ada-buyer-change"
+        name="kontak-buyer"
+        id="kontak-buyer"
+        disabled
+      />
+    </div>
+  </div>
+  <div class="my-1">
+    <div class="d-flex flex-column">
+      <label for="keterangan">Keterangan</label>
+      <textarea
+        class="form-control on-area-change on-farmers-change"
+        id="keterangan"
+        name="keterangan"
+        value=""
+        placeholder="Tulis disini jika ada kasus khusus ketika sampling"
+        disabled
+      ></textarea>
+    </div>
+  </div>
+</section>
+
+<!-- Upload File -->
+
+<section class="d-flex flex-column gap-2">
+  <div class="d-flex flex-column gap-1">
+    <label for="foto" class="fw-bolder">Dokumentasi Hasil Sampling</label>
+    <input
+      type="file"
+      class="form-control on-submit-change on-area-change on-pond-change on-farmers-change"
+      name="foto"
+      id="foto"
+      accept="image/*"
+      required
+      disabled
+    />
+  </div>
+</section>
