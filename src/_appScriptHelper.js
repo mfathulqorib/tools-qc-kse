@@ -231,7 +231,6 @@ const listSheetInformation = {
     sheetUploadData: "0. Data monitoring sampling",
     sheetUploadImage: "1. Dokumentasi monitoring sampling",
     folderUploadImage: "1TU0B0k3WxvGpO7NkqmpZ2XqZWY82lV76",
-    orderedKeyUploadData: ["nama", "lead-id", "area"],
     columnRanges: {
       area: "A2:A",
       "list-petani": "B2:C",
@@ -253,4 +252,19 @@ const listSheetInformation = {
       "keterangan",
     ],
   },
+  "monitoring-panen": {
+    sheetId: "1QH7YS1aRLwLyro1Wh8RwmOVJU19MpW1Cd0R0cz78eBI",
+    sheetUploadData: "0. Data monitoring panen",
+    sheetUploadImage: "1. Dokumentasi monitoring panen",
+    folderUploadImage: "1RBpPmbnQpfbzXtr60zDtyMn_tkfgjdzw",
+    columnRanges: {},
+    adData: ["nama", "lead-id", "area"],
+  },
 };
+
+function kebabToStartCase(str) {
+  return str
+    .split("-") // Split the string into an array of words
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize the first letter of each word
+    .join(" "); // Join the words with a space in between
+}

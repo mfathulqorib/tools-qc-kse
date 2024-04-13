@@ -1,0 +1,48 @@
+<!-- Farmers Information -->
+
+<div class="d-flex flex-column gap-1">
+  <label for="area">Area</label>
+  <select class="form-select" id="area" name="area" required>
+    <option value="" selected disabled>Pilih area</option>
+  </select>
+</div>
+<div class="d-flex flex-column gap-1">
+  <label for="list-petani">List petani</label>
+  <select
+    class="form-select"
+    id="list-petani"
+    name="list-petani"
+    disabled
+    required
+  >
+    <option value="" selected disabled>Pilih petani</option>
+  </select>
+</div>
+<div class="d-flex flex-column gap-1">
+  <label for="nama">Nama petani</label>
+  <input
+    type="text"
+    class="form-control on-area-change on-farmers-change"
+    name="nama"
+    id="nama"
+    placeholder="Pilih list petani terlebih dahulu"
+    readonly="readonly"
+    disabled
+    required
+  />
+</div>
+<div class="d-flex flex-column gap-1">
+  <label for="lead-id">Lead id</label>
+  <input
+    type="text"
+    class="form-control on-area-change on-farmers-change"
+    name="lead-id"
+    id="lead-id"
+    placeholder="Pilih list petani terlebih dahulu"
+    readonly="readonly"
+    disabled
+    required
+  />
+</div>
+
+<!-- Monitoring Panen Information -->

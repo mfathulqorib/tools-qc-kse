@@ -34,6 +34,12 @@ function doGet(e) {
     htmlOutput.getContent().replace("{{NAVBAR}}", getNavbar(page))
   );
 
+  htmlOutput.setContent(
+    htmlOutput
+      .getContent()
+      .replace("{{TITLE}}", `Form ${kebabToStartCase(page)}`)
+  );
+
   return htmlOutput;
 }
 
