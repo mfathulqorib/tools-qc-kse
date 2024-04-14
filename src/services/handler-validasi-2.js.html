@@ -1,18 +1,4 @@
 <script>
-  function handlingChangeFarmersValidasi2() {
-    $("#list-petani").on("change", (e) => {
-      const value = $(e.target).val().split(" ");
-      const nama = value.slice(0, value.length - 2);
-      const leadId = value.slice(value.length - 1);
-
-      $(".on-farmers-change").prop("disabled", false);
-      $(".on-farmers-change").val("");
-      $("#nama").val(nama.join(" "));
-      $("#lead-id").val(leadId);
-      createListPonds();
-    });
-  }
-
   function handlingChangeStatusKesiapanKolam() {
     $("#status-kesiapan-kolam").on("change", handleStatusChange);
   }
@@ -41,7 +27,7 @@
       createListArea();
       createListOnPageLoad();
       handlingChangeArea();
-      handlingChangeFarmersValidasi2();
+      handlingChangeFarmer({ pondCreate: true });
       handlingChangeStatusKesiapanKolam();
     } catch (err) {
       onFailure(err);

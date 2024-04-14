@@ -1,0 +1,68 @@
+<script>
+  const pondManager = new PondManager();
+
+  function setListPondToObject() {
+    const leadId = $("#list-petani").val().split(" - ")[1];
+
+    $("#spinnerModal").modal("show");
+    google.script.run
+      .withSuccessHandler((values) => {
+        const filteredValues = values
+          .filter(([id]) => id === leadId)
+          .map(([, pondNumber]) => pondNumber)
+          .sort((a, b) => a - b);
+        const total = filteredValues.length;
+
+        pondManager.totalPonds = total;
+        pondManager.pondList = filteredValues;
+        listPonds(values);
+      })
+      .withFailureHandler(onFailure)
+      .getListPonds();
+  }
+
+  function handlingChangeFarmersMonitoringPanen() {
+    $("#list-petani").on("change", (e) => {
+      const value = $(e.target).val().split(" ");
+      const nama = value.slice(0, value.length - 2);
+      const leadId = value.slice(value.length - 1);
+
+      resetObjectProperty(pondManager, "pondCount", 1);
+
+      $(".on-farmers-change").prop("disabled", false);
+      $(".on-farmers-change").val("");
+      $("#nama").val(nama.join(" "));
+      $("#lead-id").val(leadId);
+
+      setListPondToObject();
+      $(".additional-element").remove();
+    });
+  }
+
+  function resetAddtitionalElementCounter() {
+    resetObjectProperty(pondManager, "pondCount", 1);
+    resetObjectProperty(pondManager, "totalPonds", 1);
+  }
+
+  function functionInit() {
+    try {
+      $(window).on("beforeunload", showModalsOnLoading);
+      $("#loading-button").hide();
+      preventFormSubmit("form-monitoring-sampling");
+      createListArea();
+      createListOnPageLoad();
+      handlingChangeArea(true, resetAddtitionalElementCounter);
+      handlingChangeFarmer({
+        deleteAdditionalElement: true,
+        resetCounter: resetAddtitionalElementCounter,
+        callbackFunction: setListPondToObject,
+      });
+      // handlingChangeFarmersMonitoringPanen();
+      setMaxDateToday("#tanggal-panen");
+    } catch (err) {
+      onFailure(err);
+    }
+  }
+
+  $(document).ready(functionInit);
+</script>

@@ -98,6 +98,12 @@
     $("#spinnerModal").modal("show");
   }
 
+  function hideSpinnerModal() {
+    if ($("#spinnerModal").is(":visible")) {
+      $("#spinnerModal").modal("hide");
+    }
+  }
+
   // FORM SUBMIT handler section
   function handleFormSubmit(formData) {
     const formId = formData.id;
@@ -233,7 +239,10 @@
       .getListFarmers();
   }
 
-  function handlingChangeArea() {
+  function handlingChangeArea(
+    deleteAdditionalElement = false,
+    resetCounter = false
+  ) {
     $("#area").on("change", () => {
       $(".on-area-change").val("");
       $("#list-petani").empty().prop("disabled", false);
@@ -242,19 +251,44 @@
       if (!$("#list-petani").val()) {
         $(".on-area-change").val("").prop("disabled", true);
       }
+
+      if (deleteAdditionalElement && resetCounter) {
+        $(".additional-element").remove();
+        resetCounter();
+      }
     });
   }
 
-  function handlingChangeFarmer() {
-    $("#list-petani").on("change", function () {
-      const value = $(this).val().split(" ");
-      const nama = value.slice(0, value.length - 2);
-      const leadId = value.slice(value.length - 1);
+  function updateUIElements(name, leadId) {
+    $(".on-farmers-change").prop("disabled", false);
+    $(".on-farmers-change").val("");
+    $("#nama").val(name);
+    $("#lead-id").val(leadId);
+  }
 
-      $(".on-farmers-change").prop("disabled", false);
-      $(".on-farmers-change").val("");
-      $("#nama").val(nama.join(" "));
-      $("#lead-id").val(leadId);
+  function handlingChangeFarmer({
+    pondCreate = false,
+    deleteAdditionalElement = false,
+    resetCounter = null,
+    callbackFunction = null,
+  }) {
+    $("#list-petani").on("change", (e) => {
+      const [name, leadId] = $(e.target).val().split(" - ");
+
+      updateUIElements(name, leadId);
+
+      if (pondCreate) {
+        createListPonds();
+      }
+      if (deleteAdditionalElement) {
+        $(".additional-element").remove();
+      }
+      if (typeof resetCounter === "function") {
+        resetCounter();
+      }
+      if (typeof callbackFunction === "function") {
+        callbackFunction();
+      }
     });
   }
 
@@ -348,12 +382,6 @@
     });
   }
 
-  function hideSpinnerModal() {
-    if ($("#spinnerModal").is(":visible")) {
-      $("#spinnerModal").modal("hide");
-    }
-  }
-
   function handlingYesOrNoQuestion(questionSelector, fileInputSelector) {
     const $question = $(questionSelector);
     const $fileInput = $(fileInputSelector);
@@ -370,6 +398,10 @@
     const maxDate = now.toISOString().substring(0, 10);
 
     $fileInput.prop("max", maxDate);
+  }
+
+  function resetObjectProperty(obj, prop, value) {
+    obj[prop] = value;
   }
 
   // end of DOM FUNCTION section

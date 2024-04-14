@@ -97,20 +97,6 @@
       });
   }
 
-  function handlingChangeFarmersValidasi2() {
-    $("#list-petani").on("change", (e) => {
-      const value = $(e.target).val().split(" ");
-      const nama = value.slice(0, value.length - 2);
-      const leadId = value.slice(value.length - 1);
-
-      $(".on-farmers-change").prop("disabled", false);
-      $(".on-farmers-change").val("");
-      $("#nama").val(nama.join(" "));
-      $("#lead-id").val(leadId);
-      createListPonds();
-    });
-  }
-
   function functionInit() {
     try {
       $(window).on("beforeunload", showModalsOnLoading);
@@ -119,7 +105,7 @@
       createListArea();
       createListOnPageLoad();
       handlingChangeArea();
-      handlingChangeFarmersValidasi2();
+      handlingChangeFarmer({ pondCreate: true });
       setMaxDateToday("#tanggal-cek-budidaya");
       handlingYesOrNoQuestion("#apakah-mencatat-pakan", "#foto-logbook-pakan");
     } catch (err) {

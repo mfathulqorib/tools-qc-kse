@@ -3,37 +3,48 @@
     constructor() {
       this.skuCount = 1;
       this.maxSkus = 4;
+      this.skuList;
     }
 
     addSKU() {
-      if (this.skuCount < this.maxSkus) {
+      if (this.skuList && this.skuCount < this.maxSkus) {
         this.skuCount++;
-        this.showSpinner();
+        // showModalsOnLoading();
+
+        const $listSKUPakan = $("#list-sku-pakan");
         const skuElement = this.createSKUElement(this.skuCount);
         const qtyElement = this.createQtyElement(this.skuCount);
         const qtyOpenElement = this.createQtyOpenElement(this.skuCount);
-        const separatorContainer = $("<div>", {
-          class: "ps-3 additional-sku deleted-after-submit",
-        });
-        const separator = $("<hr>", {
-          class: "hr border-3 my-2 additional-sku deleted-after-submit",
-        });
-        const $listSKUPakan = $("#list-sku-pakan");
+        const separatorElement = this.createSeparatorElement();
 
-        separatorContainer.append(separator);
+        $listSKUPakan.append(
+          skuElement,
+          qtyElement,
+          qtyOpenElement,
+          separatorElement
+        );
 
-        $listSKUPakan
-          .prop("hidden", false)
-          .append(skuElement, qtyElement, qtyOpenElement, separatorContainer);
-
-        this.createSkuDropdown(this.skuCount);
+        this.populateSkuDropdown(this.skuList, this.skuCount);
       }
+    }
+
+    createSeparatorElement() {
+      const separatorContainer = $("<div>", {
+        class: "ps-3 additional-element deleted-after-submit",
+      });
+      const separator = $("<hr>", {
+        class: "hr border-3 my-2 additional-element deleted-after-submit",
+      });
+
+      separatorContainer.append(separator);
+
+      return separatorContainer;
     }
 
     createSKUElement(skuCount) {
       const skuContainer = $("<div>", {
         class:
-          "d-flex flex-column gap-1 ps-3 additional-sku deleted-after-submit",
+          "d-flex flex-column gap-1 ps-3 additional-element deleted-after-submit",
       });
       const skuLabel = $("<label>", {
         for: `sku-pakan-${skuCount}`,
@@ -60,7 +71,7 @@
     createQtyElement(skuCount) {
       const qtyContainer = $("<div>", {
         class:
-          "d-flex flex-column gap-1 ps-3 additional-sku deleted-after-submit",
+          "d-flex flex-column gap-1 ps-3 additional-element deleted-after-submit",
       });
       const qtyLabel = $("<label>", {
         for: `qty-pakan-${skuCount}`,
@@ -83,7 +94,7 @@
     createQtyOpenElement(skuCount) {
       const qtyOpenContainer = $("<div>", {
         class:
-          "d-flex flex-column gap-1 ps-3 additional-sku deleted-after-submit",
+          "d-flex flex-column gap-1 ps-3 additional-element deleted-after-submit",
       });
       const qtyOpenLabel = $("<label>", {
         for: `qty-pakan-${skuCount}-open`,
@@ -113,27 +124,77 @@
         .getListSkuPakan();
     }
 
-    populateSkuDropdown(values, skuCount) {
+    populateSkuDropdown(skuList, skuCount) {
       const $skuSelect = $(`#sku-pakan-${skuCount}`);
 
-      this.hideSpinner();
+      hideSpinnerModal();
 
-      values.forEach((value) => {
+      skuList.forEach((value) => {
         const option = $("<option>", { value, text: value });
         $skuSelect.append(option);
       });
     }
-
-    showSpinner() {
-      $("#spinnerModal").modal("show");
-    }
-
-    hideSpinner() {
-      $("#spinnerModal").modal("hide");
-    }
   }
 
-  class pondManager {
-    constructor() {}
+  class PondManager {
+    constructor() {
+      this.pondCount = 1;
+      this.maxPonds = 10;
+      this.pondList;
+      this.totalPonds;
+    }
+
+    addPond() {
+      if (
+        this.totalPonds &&
+        this.pondCount < this.totalPonds &&
+        this.pondCount < this.maxPonds
+      ) {
+        this.pondCount++;
+
+        const $listKolam = $("#list-no-kolam");
+        const pondElement = this.createPondElement(
+          this.pondCount,
+          this.pondList
+        );
+
+        $listKolam.append(pondElement);
+      }
+    }
+
+    createPondElement(pondCount, pondList) {
+      const pondContainer = $("<div>", {
+        class:
+          "d-flex flex-column gap-1 additional-element deleted-after-submit",
+      });
+      const pondLabel = $("<label>", {
+        for: `no-kolam-${pondCount}`,
+        text: `Nomor kolam`,
+      });
+      const pondSelect = $("<select>", {
+        id: `no-kolam-${pondCount}`,
+        class: "form-select",
+        name: `no-kolam-${pondCount}`,
+      });
+      const defaultOption = $("<option>", {
+        disabled: true,
+        selected: true,
+        value: "",
+        text: "Pilih no kolam",
+      });
+
+      pondContainer.append(pondLabel, pondSelect);
+      pondSelect.append(defaultOption);
+      pondList.forEach((pondNumber, index) => {
+        pondSelect.append(
+          $("<option>", {
+            value: pondNumber,
+            text: pondNumber,
+          })
+        );
+      });
+
+      return pondContainer;
+    }
   }
 </script>

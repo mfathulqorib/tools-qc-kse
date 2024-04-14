@@ -1,29 +1,30 @@
 <script>
-  function functionInit(){
+  function functionInit() {
     try {
-      const $fieldNumericInput = $('.numeric-input')
+      const $fieldNumericInput = $(".numeric-input");
 
-      $(window).on('beforeunload', showModalsOnLoading)
-      $('#loading-button').hide();
-      preventFormSubmit('form-validasi-1');
+      $(window).on("beforeunload", showModalsOnLoading);
+      $("#loading-button").hide();
+      preventFormSubmit("form-validasi-1");
       createListArea();
       createListOnPageLoad();
       handlingChangeArea();
-      handlingChangeFarmer();
+      handlingChangeFarmer({});
       handlingChangePond();
 
       $fieldNumericInput.each((index, element) => {
         numericInput(element.id);
-      })
+      });
+    } catch (err) {
+      onFailure(err);
     }
-    catch(err) {
-      onFailure(err)
-    }
-  };
+  }
 
   function getLocation() {
     if (!navigator.geolocation) {
-      window.alert("Browser tidak support untuk mendapatkan lokasi, tolong isi link gmap secara manual :)");
+      window.alert(
+        "Browser tidak support untuk mendapatkan lokasi, tolong isi link gmap secara manual :)"
+      );
     } else {
       navigator.geolocation.getCurrentPosition(
         successGetLocation,
@@ -33,22 +34,24 @@
   }
 
   function successGetLocation(loc) {
-    const $inputLocation = $("#lokasi-kolam")
+    const $inputLocation = $("#lokasi-kolam");
 
     $inputLocation.val(
-        "https://www.google.com/maps/search/?api=1&query=" + 
-        loc.coords.latitude + 
-        "%2C" + 
+      "https://www.google.com/maps/search/?api=1&query=" +
+        loc.coords.latitude +
+        "%2C" +
         loc.coords.longitude
-      );
+    );
   }
 
   function failGetLocation() {
-    window.alert("Browser tidak diberikan izin untuk akses lokasi, tolong berikan izin untuk akses lokasi :)");
+    window.alert(
+      "Browser tidak diberikan izin untuk akses lokasi, tolong berikan izin untuk akses lokasi :)"
+    );
   }
 
   function toTop() {
-    $('html, body').animate({ scrollTop: 0 }, 'smooth');
+    $("html, body").animate({ scrollTop: 0 }, "smooth");
   }
 
   $(document).ready(functionInit);

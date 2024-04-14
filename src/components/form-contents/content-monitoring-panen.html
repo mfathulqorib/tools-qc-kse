@@ -46,3 +46,164 @@
 </div>
 
 <!-- Monitoring Panen Information -->
+
+<section class="d-flex flex-column gap-2">
+  <div class="d-flex flex-column gap-2">
+    <p class="fw-bolder m-0">Data Monitoring Panen</p>
+  </div>
+  <div class="ps-3">
+    <div class="d-flex flex-column gap-1">
+      <label for="tanggal-panen">Tanggal Panen</label>
+      <input
+        type="date"
+        class="form-control on-area-change on-farmers-change"
+        name="tanggal-panen"
+        id="tanggal-panen"
+        disabled
+        required
+      />
+    </div>
+  </div>
+  <div class="ps-3">
+    <div class="d-flex flex-column gap-1">
+      <label for="tipe-panen">Tipe Panen</label>
+      <select
+        class="form-select on-area-change on-farmers-change on-pond-change create-list-on-page-load"
+        id="tipe-panen"
+        name="tipe-panen"
+        required
+        disabled
+      >
+        <option value="" selected disabled>Pilih tipe panen</option>
+      </select>
+    </div>
+  </div>
+  <div class="ps-3">
+    <div class="d-flex flex-column gap-1">
+      <label for="tipe-buyer">Tipe Buyer</label>
+      <select
+        class="form-select on-area-change on-farmers-change on-pond-change create-list-on-page-load"
+        id="tipe-buyer"
+        name="tipe-buyer"
+        required
+        disabled
+      >
+        <option value="" selected disabled>Pilih tipe buyer</option>
+      </select>
+    </div>
+  </div>
+  <div class="d-flex flex-column gap-2 ps-3" id="list-grade-panen">
+    <div class="d-flex flex-column gap-1">
+      <label for="tonase-ikan-grade-a"
+        >Tonase ikan grade A
+        <div class="form-text m-0">Dalam satuan kilogram (kg)</div>
+      </label>
+      <input
+        type="text"
+        class="form-control on-area-change on-farmers-change on-pond-change"
+        name="tonase-ikan-grade-a"
+        id="tonase-ikan-grade-a"
+        disabled
+      />
+    </div>
+    <div class="d-flex flex-column gap-1">
+      <label for="harga-ikan-grade-a"
+        >Harga ikan grade A
+        <div class="form-text m-0">Dalam satuan rupiah (rp)</div>
+      </label>
+      <input
+        type="text"
+        class="form-control on-area-change on-farmers-change on-pond-change"
+        name="harga-ikan-grade-a"
+        id="harga-ikan-grade-a"
+        disabled
+      />
+    </div>
+    <div class="d-flex flex-column gap-1">
+      <label for="size-ikan-grade-a"
+        >Size ikan grade A
+        <div class="form-text m-0">
+          Dalam satuan ekor/kg. Hanya masukan angka dan strip tanpa spasi,
+          contoh: 3-5
+        </div>
+      </label>
+      <input
+        type="text"
+        class="form-control on-area-change on-farmers-change on-pond-change"
+        name="size-ikan-grade-a"
+        id="size-ikan-grade-a"
+        disabled
+      />
+    </div>
+  </div>
+  <div class="ps-3 my-2">
+    <div class="d-flex flex-column">
+      <button
+        type="button"
+        class="btn btn-secondary btn-block"
+        id="add-sku-button"
+        onclick="console.log('tambah grade ikan')"
+      >
+        Tambah grade panen ikan
+      </button>
+      <div class="form-text">Maksimal 3 grade panen yang bisa ditambahkan</div>
+    </div>
+  </div>
+  <div class="d-flex flex-column gap-2 ps-3" id="list-no-kolam">
+    <div class="d-flex flex-column gap-1">
+      <label for="nomor-kolam">Nomor kolam</label>
+      <select
+        class="form-select on-area-change on-farmers-change"
+        id="nomor-kolam"
+        name="nomor-kolam"
+        disabled
+        required
+      >
+        <option value="" selected disabled>Pilih no kolam</option>
+      </select>
+    </div>
+  </div>
+  <div class="ps-3 my-2">
+    <div class="d-flex flex-column">
+      <button
+        type="button"
+        class="btn btn-secondary btn-block"
+        id="add-sku-button"
+        onclick="pondManager.addPond()"
+      >
+        Tambah no kolam
+      </button>
+      <div class="form-text">Maksimal 10 no kolam yang bisa ditambahkan</div>
+    </div>
+  </div>
+  <div class="my-1">
+    <div class="d-flex flex-column">
+      <label for="keterangan">Keterangan</label>
+      <textarea
+        class="form-control on-area-change on-farmers-change"
+        id="keterangan"
+        name="keterangan"
+        value=""
+        placeholder="Tulis disini jika terjadi kasus khusus pada saat panen"
+        value
+        disabled
+      ></textarea>
+    </div>
+  </div>
+</section>
+
+<!-- Upload File -->
+
+<section class="d-flex flex-column gap-2">
+  <label for="foto" class="fw-bolder">Dokumentasi Monitoring Panen</label>
+  <input
+    type="file"
+    class="form-control on-submit-change on-area-change on-farmers-change on-pond-change"
+    name="foto"
+    id="foto"
+    accept="image/*"
+    multiple
+    required
+    disabled
+  />
+</section>

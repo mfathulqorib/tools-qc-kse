@@ -257,8 +257,14 @@ const listSheetInformation = {
     sheetUploadData: "0. Data monitoring panen",
     sheetUploadImage: "1. Dokumentasi monitoring panen",
     folderUploadImage: "1RBpPmbnQpfbzXtr60zDtyMn_tkfgjdzw",
-    columnRanges: {},
-    adData: ["nama", "lead-id", "area"],
+    columnRanges: {
+      area: "A2:A",
+      "list-petani": "B2:C",
+      "nomor-kolam": "D2:F",
+      "tipe-panen": "G2:G",
+      "tipe-buyer": "H2:H",
+    },
+    orderedKeyUploadData: ["nama", "lead-id", "area"],
   },
 };
 

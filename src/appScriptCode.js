@@ -54,6 +54,7 @@ function getNavbar(page) {
   );
   const scriptURLMonitoringBudidaya = getScriptURL("mode=monitoring-budidaya");
   const scriptURLMonitoringSampling = getScriptURL("mode=monitoring-sampling");
+  const scriptURLMonitoringPanen = getScriptURL("mode=monitoring-panen");
 
   const navLinks = [
     {
@@ -90,6 +91,11 @@ function getNavbar(page) {
       text: "Monitoring Sampling",
       url: scriptURLMonitoringSampling,
       isActive: page === "monitoring-sampling",
+    },
+    {
+      text: "Monitoring Panen",
+      url: scriptURLMonitoringPanen,
+      isActive: page === "monitoring-panen",
     },
   ];
 
@@ -244,8 +250,11 @@ function uploadData(formData) {
   const lastColumnSheetAssessment = sheetAssessmentKolam.getLastColumn();
   const { "lead-id": leadId, "nomor-kolam": pondNumber } = formData;
   const pondId = `${leadId}${"0".repeat(
-    4 - pondNumber?.toString().length
-  )}${pondNumber}`;
+    4 - (pondNumber?.toString().length || 0)
+  )}${pondNumber ?? ""}`;
+  const isNumeric = key.match(/^numeric/i);
+  const isPondId = key === "pond-id";
+  const isSetFormula = key.match(/^setFormula/i);
 
   const dataForSheet = [
     [
@@ -253,11 +262,11 @@ function uploadData(formData) {
       userEmail,
       timeStamp,
       ...activePage.orderedKeyUploadData.map((key) => {
-        if (key.match(/^numeric/i)) {
+        if (isNumeric) {
           return formData[key]?.toString().replace(",", "") || "-";
-        } else if (key === "pond-id") {
+        } else if (isPondId) {
           return pondId || "-";
-        } else if (key.match(/^setFormula/i)) {
+        } else if (isSetFormula) {
           return;
         } else {
           return formData[key] || "-";
