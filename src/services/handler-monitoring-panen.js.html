@@ -1,5 +1,6 @@
 <script>
   const pondManager = new PondManager();
+  const gradePanenManager = new GradePanenManager();
 
   function setListPondToObject() {
     const leadId = $("#list-petani").val().split(" - ")[1];
@@ -42,12 +43,14 @@
   function resetAddtitionalElementCounter() {
     resetObjectProperty(pondManager, "pondCount", 1);
     resetObjectProperty(pondManager, "totalPonds", 1);
+    resetObjectProperty(gradePanenManager, "gradePanenCount", 1);
   }
 
   function functionInit() {
     try {
       $(window).on("beforeunload", showModalsOnLoading);
       $("#loading-button").hide();
+      setNumericInputValidation();
       preventFormSubmit("form-monitoring-sampling");
       createListArea();
       createListOnPageLoad();
@@ -57,7 +60,6 @@
         resetCounter: resetAddtitionalElementCounter,
         callbackFunction: setListPondToObject,
       });
-      // handlingChangeFarmersMonitoringPanen();
       setMaxDateToday("#tanggal-panen");
     } catch (err) {
       onFailure(err);

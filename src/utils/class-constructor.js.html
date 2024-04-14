@@ -18,10 +18,10 @@
         const separatorElement = this.createSeparatorElement();
 
         $listSKUPakan.append(
+          separatorElement,
           skuElement,
           qtyElement,
-          qtyOpenElement,
-          separatorElement
+          qtyOpenElement
         );
 
         this.populateSkuDropdown(this.skuList, this.skuCount);
@@ -195,6 +195,121 @@
       });
 
       return pondContainer;
+    }
+  }
+
+  class GradePanenManager {
+    constructor() {
+      this.gradePanenCount = 1;
+      this.maxGradePanen = 3;
+    }
+
+    addGradePanen() {
+      if (this.gradePanenCount < this.maxGradePanen) {
+        this.gradePanenCount++;
+
+        const $listGradePanen = $("#list-grade-panen");
+        const tonasePanenElement = this.createTonasePanenElement(
+          this.gradePanenCount
+        );
+        const hargaIkanElement = this.createHargaIkanElement(
+          this.gradePanenCount
+        );
+        const sizeIkanElement = this.createSizeIkanElement(
+          this.gradePanenCount
+        );
+        const seperatorElement = this.createSeparatorElement();
+
+        $listGradePanen.append(
+          seperatorElement,
+          tonasePanenElement,
+          hargaIkanElement,
+          sizeIkanElement
+        );
+
+        setNumericInputValidation();
+      }
+    }
+
+    createTonasePanenElement(gradePanenCount) {
+      const tonasePanenContainer = $("<div>", {
+        class:
+          "d-flex flex-column gap-1 additional-element deleted-after-submit",
+      });
+      const tonasePanenLabel = $("<label>", {
+        for: `tonase-ikan-grade-${numberToChar(gradePanenCount)}`,
+        text: `Tonase ikan grade ${numberToChar(
+          gradePanenCount
+        ).toUpperCase()}`,
+      });
+      const tonasePanenInput = $("<input>", {
+        id: `tonase-ikan-grade-${numberToChar(gradePanenCount)}`,
+        name: `tonase-ikan-grade-${numberToChar(gradePanenCount)}`,
+        class: "form-control numeric-input",
+        type: "text",
+        placeholder: "Dalam satuan kilogram (kg)",
+      });
+
+      tonasePanenContainer.append(tonasePanenLabel, tonasePanenInput);
+
+      return tonasePanenContainer;
+    }
+
+    createHargaIkanElement(gradePanenCount) {
+      const hargaIkanContainer = $("<div>", {
+        class:
+          "d-flex flex-column gap-1 additional-element deleted-after-submit",
+      });
+      const hargaIkanLabel = $("<label>", {
+        for: `harga-ikan-grade-${numberToChar(gradePanenCount)}`,
+        text: `Harga ikan grade ${numberToChar(gradePanenCount).toUpperCase()}`,
+      });
+      const hargaIkanInput = $("<input>", {
+        id: `harga-ikan-grade-${numberToChar(gradePanenCount)}`,
+        name: `harga-ikan-grade-${numberToChar(gradePanenCount)}`,
+        class: "form-control numeric-input",
+        type: "text",
+        placeholder: "Dalam satuan rupiah (rp)",
+      });
+
+      hargaIkanContainer.append(hargaIkanLabel, hargaIkanInput);
+
+      return hargaIkanContainer;
+    }
+
+    createSizeIkanElement(gradePanenCount) {
+      const sizeIkanContainer = $("<div>", {
+        class:
+          "d-flex flex-column gap-1 additional-element deleted-after-submit",
+      });
+      const sizeIkanLabel = $("<label>", {
+        for: `size-ikan-grade-${numberToChar(gradePanenCount)}`,
+        text: `Size ikan grade ${numberToChar(gradePanenCount).toUpperCase()}`,
+      });
+      const sizeIkanInput = $("<input>", {
+        id: `size-ikan-grade-${numberToChar(gradePanenCount)}`,
+        name: `size-ikan-grade-${numberToChar(gradePanenCount)}`,
+        class: "form-control numeric-input",
+        type: "text",
+        placeholder: "Dalam satuan ekor/kg",
+      });
+      const sizeIkanDescription = $("<div>", {
+        class: "form-text m-0",
+        text: "Hanya masukan angka dan strip tanpa spasi, contoh: 3-5",
+      });
+
+      sizeIkanLabel.append(sizeIkanDescription);
+      sizeIkanContainer.append(sizeIkanLabel, sizeIkanInput);
+
+      return sizeIkanContainer;
+    }
+
+    createSeparatorElement() {
+      const separator = $("<hr>", {
+        class: "hr border-3 mt-2 mb-0 additional-element deleted-after-submit",
+      });
+
+      return separator;
     }
   }
 </script>

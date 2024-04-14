@@ -102,7 +102,7 @@ function getNavbar(page) {
   const navbarTemplate = `
   <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand">Tools QC - 2024 🔥</a>
+      <a class="navbar-brand ps-3">Tools QC - 2024 🔥</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon" id="trigger-btn"></span>
       </button>
@@ -252,9 +252,6 @@ function uploadData(formData) {
   const pondId = `${leadId}${"0".repeat(
     4 - (pondNumber?.toString().length || 0)
   )}${pondNumber ?? ""}`;
-  const isNumeric = key.match(/^numeric/i);
-  const isPondId = key === "pond-id";
-  const isSetFormula = key.match(/^setFormula/i);
 
   const dataForSheet = [
     [
@@ -262,6 +259,10 @@ function uploadData(formData) {
       userEmail,
       timeStamp,
       ...activePage.orderedKeyUploadData.map((key) => {
+        const isNumeric = key.match(/^numeric/i);
+        const isPondId = key === "pond-id";
+        const isSetFormula = key.match(/^setFormula/i);
+
         if (isNumeric) {
           return formData[key]?.toString().replace(",", "") || "-";
         } else if (isPondId) {

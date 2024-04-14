@@ -395,7 +395,10 @@
   function setMaxDateToday(fileInputSelector) {
     const $fileInput = $(fileInputSelector);
     const now = new Date();
-    const maxDate = now.toISOString().substring(0, 10);
+    const tommorow = new Date();
+    tommorow.setDate(now.getDate() + 1);
+
+    const maxDate = tommorow.toISOString().substring(0, 10);
 
     $fileInput.prop("max", maxDate);
   }
@@ -404,5 +407,16 @@
     obj[prop] = value;
   }
 
+  function numberToChar(num) {
+    const char = String.fromCharCode(num + 96);
+    return char;
+  }
+
+  function setNumericInputValidation() {
+    const $fieldNumericInput = $(".numeric-input");
+    $fieldNumericInput.each((index, element) => {
+      numericInput(element.id);
+    });
+  }
   // end of DOM FUNCTION section
 </script>

@@ -94,28 +94,24 @@
   </div>
   <div class="d-flex flex-column gap-2 ps-3" id="list-grade-panen">
     <div class="d-flex flex-column gap-1">
-      <label for="tonase-ikan-grade-a"
-        >Tonase ikan grade A
-        <div class="form-text m-0">Dalam satuan kilogram (kg)</div>
-      </label>
+      <label for="tonase-ikan-grade-a">Tonase ikan grade A </label>
       <input
         type="text"
-        class="form-control on-area-change on-farmers-change on-pond-change"
+        class="form-control numeric-input on-area-change on-farmers-change on-pond-change"
         name="tonase-ikan-grade-a"
         id="tonase-ikan-grade-a"
+        placeholder="Dalam satuan kilogram (kg)"
         disabled
       />
     </div>
     <div class="d-flex flex-column gap-1">
-      <label for="harga-ikan-grade-a"
-        >Harga ikan grade A
-        <div class="form-text m-0">Dalam satuan rupiah (rp)</div>
-      </label>
+      <label for="harga-ikan-grade-a">Harga ikan grade A </label>
       <input
         type="text"
-        class="form-control on-area-change on-farmers-change on-pond-change"
+        class="form-control numeric-input on-area-change on-farmers-change on-pond-change"
         name="harga-ikan-grade-a"
         id="harga-ikan-grade-a"
+        placeholder="Dalam satuan rupiah (rp)"
         disabled
       />
     </div>
@@ -123,15 +119,15 @@
       <label for="size-ikan-grade-a"
         >Size ikan grade A
         <div class="form-text m-0">
-          Dalam satuan ekor/kg. Hanya masukan angka dan strip tanpa spasi,
-          contoh: 3-5
+          Hanya masukan angka dan strip tanpa spasi, contoh: 3-5
         </div>
       </label>
       <input
         type="text"
-        class="form-control on-area-change on-farmers-change on-pond-change"
+        class="form-control size-panen-validation on-area-change on-farmers-change on-pond-change"
         name="size-ikan-grade-a"
         id="size-ikan-grade-a"
+        placeholder="Dalam satuan ekor/kg"
         disabled
       />
     </div>
@@ -142,7 +138,7 @@
         type="button"
         class="btn btn-secondary btn-block"
         id="add-sku-button"
-        onclick="console.log('tambah grade ikan')"
+        onclick="gradePanenManager.addGradePanen()"
       >
         Tambah grade panen ikan
       </button>

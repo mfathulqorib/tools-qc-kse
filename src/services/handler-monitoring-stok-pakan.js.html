@@ -3,8 +3,6 @@
   const skuManager = new SkuManager();
 
   function setSkuListToObject() {
-    const leadId = $("#list-petani").val().split(" - ")[1];
-
     $("#spinnerModal").modal("show");
     google.script.run
       .withSuccessHandler((values) => {
@@ -23,17 +21,16 @@
     try {
       $(window).on("beforeunload", showModalsOnLoading);
       $("#loading-button").hide();
+      setSkuListToObject();
       preventFormSubmit("form-monitoring-stok-pakan");
       createListArea();
       createListOnPageLoad();
-      handlingChangeArea(true, () => {
-        return resetObjectProperty(skuManager, "skuCount", 1);
-      });
+      handlingChangeArea(true, resetAdditionalElementCounter);
       handlingChangeFarmer({
         deleteAdditionalElement: true,
         resetCounter: resetAdditionalElementCounter,
-        callbackFunction: setSkuListToObject,
       });
+      setMaxDateToday("#tanggal-cek-pakan");
     } catch (err) {
       onFailure(err);
     }
