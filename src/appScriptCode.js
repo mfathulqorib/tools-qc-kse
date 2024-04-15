@@ -250,7 +250,7 @@ function uploadData(formData) {
   const lastColumnSheetAssessment = sheetAssessmentKolam.getLastColumn();
   const { "lead-id": leadId, "nomor-kolam": pondNumber } = formData;
   const pondId = `${leadId}${"0".repeat(
-    4 - (pondNumber?.toString().length || 0)
+    Math.abs(4 - (pondNumber?.toString().length || 0))
   )}${pondNumber ?? ""}`;
 
   const dataForSheet = [

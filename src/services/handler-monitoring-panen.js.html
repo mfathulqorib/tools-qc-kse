@@ -2,10 +2,9 @@
   const pondManager = new PondManager();
   const gradePanenManager = new GradePanenManager();
 
-  function setListPondToObject() {
-    const leadId = $("#list-petani").val().split(" - ")[1];
-
+  function setListPondToObject(leadId) {
     $("#spinnerModal").modal("show");
+    pondManager.leadId = leadId;
     google.script.run
       .withSuccessHandler((values) => {
         const filteredValues = values
@@ -16,28 +15,10 @@
 
         pondManager.totalPonds = total;
         pondManager.pondList = filteredValues;
-        listPonds(values);
+        listPonds(values, true);
       })
       .withFailureHandler(onFailure)
       .getListPonds();
-  }
-
-  function handlingChangeFarmersMonitoringPanen() {
-    $("#list-petani").on("change", (e) => {
-      const value = $(e.target).val().split(" ");
-      const nama = value.slice(0, value.length - 2);
-      const leadId = value.slice(value.length - 1);
-
-      resetObjectProperty(pondManager, "pondCount", 1);
-
-      $(".on-farmers-change").prop("disabled", false);
-      $(".on-farmers-change").val("");
-      $("#nama").val(nama.join(" "));
-      $("#lead-id").val(leadId);
-
-      setListPondToObject();
-      $(".additional-element").remove();
-    });
   }
 
   function resetAddtitionalElementCounter() {
@@ -48,9 +29,17 @@
 
   function functionInit() {
     try {
+      const $numericInput = $(".numeric-input");
+      const $sizePanenInput = $(".size-panen-validation");
+
       $(window).on("beforeunload", showModalsOnLoading);
       $("#loading-button").hide();
-      setNumericInputValidation();
+      setInputValidation($numericInput, (elementId) => {
+        numericInput(elementId);
+      });
+      setInputValidation($sizePanenInput, (elementId) => {
+        sizePanenInput(elementId);
+      });
       preventFormSubmit("form-monitoring-sampling");
       createListArea();
       createListOnPageLoad();
@@ -58,7 +47,11 @@
       handlingChangeFarmer({
         deleteAdditionalElement: true,
         resetCounter: resetAddtitionalElementCounter,
-        callbackFunction: setListPondToObject,
+        callbackFunction: () => {
+          const leadId = $("#lead-id").val();
+
+          return setListPondToObject(leadId);
+        },
       });
       setMaxDateToday("#tanggal-panen");
     } catch (err) {

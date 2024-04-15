@@ -32,31 +32,6 @@
     $("#submit-button").prop("disabled", false);
   };
 
-  function numericInput(inp) {
-    const $inp = $(`#${inp}`);
-    const numericKeys = ".0123456789";
-
-    // Restricts input to numeric keys 0-9
-    $inp.on("keypress", function (e) {
-      if (numericKeys.indexOf(e.key) === -1) {
-        e.preventDefault();
-      }
-    });
-
-    // Add the thousands separator when the user blurs
-    $inp.on("blur", function () {
-      const tmp = $(this).val().replace(/,/g, "");
-      const val = Number(tmp).toLocaleString("en-CA");
-
-      $(this).val(tmp === "" ? "" : val);
-    });
-
-    // Strip the thousands separator when the user puts the input in focus
-    $inp.on("focus", function () {
-      $(this).val($(this).val().replace(/,/g, ""));
-    });
-  }
-
   function showToastOnSuccess() {
     const toastLiveExample = $("#success-toast")[0];
     const toastBootstrap =
@@ -271,6 +246,7 @@
     deleteAdditionalElement = false,
     resetCounter = null,
     callbackFunction = null,
+    isPondIdValue = false,
   }) {
     $("#list-petani").on("change", (e) => {
       const [name, leadId] = $(e.target).val().split(" - ");
@@ -278,7 +254,7 @@
       updateUIElements(name, leadId);
 
       if (pondCreate) {
-        createListPonds();
+        createListPonds(isPondIdValue);
       }
       if (deleteAdditionalElement) {
         $(".additional-element").remove();
@@ -322,10 +298,9 @@
     $("#spinnerModal").modal("hide");
   }
 
-  function listPonds(values) {
+  function listPonds(values, isPondIdValue = false) {
     const $select = $("#nomor-kolam");
     const $placeholderOpt = $("<option>");
-
     const leadId = $("#lead-id").val();
     const sortedPondNumbers = values
       .filter(([id]) => id === leadId)
@@ -342,20 +317,35 @@
 
     $select.empty().append($placeholderOpt);
 
-    sortedPondNumbers.forEach((pondNumber, index) => {
-      $select.append(
-        $("<option>", {
-          value: pondNumber,
-          text: pondNumber,
-        })
-      );
-    });
+    if (isPondIdValue) {
+      sortedPondNumbers.forEach((pondNumber, index) => {
+        $select.append(
+          $("<option>", {
+            value: `${leadId}${"0".repeat(
+              4 - (pondNumber?.toString().length || 0)
+            )}${pondNumber ?? ""}`,
+            text: pondNumber,
+          })
+        );
+      });
+    } else {
+      sortedPondNumbers.forEach((pondNumber, index) => {
+        $select.append(
+          $("<option>", {
+            value: pondNumber,
+            text: pondNumber,
+          })
+        );
+      });
+    }
   }
 
-  function createListPonds() {
+  function createListPonds(isPondIdValue = false) {
     $("#spinnerModal").modal("show");
     google.script.run
-      .withSuccessHandler(listPonds)
+      .withSuccessHandler((values) => {
+        listPonds(values, isPondIdValue);
+      })
       .withFailureHandler(onFailure)
       .getListPonds();
   }
@@ -412,10 +402,57 @@
     return char;
   }
 
-  function setNumericInputValidation() {
-    const $fieldNumericInput = $(".numeric-input");
-    $fieldNumericInput.each((index, element) => {
-      numericInput(element.id);
+  function numericInput(inp) {
+    const $inp = $(`#${inp}`);
+    const numericKeys = ".0123456789";
+
+    // Restricts input to numeric keys 0-9
+    $inp.on("keypress", function (e) {
+      if (numericKeys.indexOf(e.key) === -1) {
+        e.preventDefault();
+      }
+    });
+
+    // Add the thousands separator when the user blurs
+    $inp.on("blur", function () {
+      const tmp = $(this).val().replace(/,/g, "");
+      const val = Number(tmp).toLocaleString("en-CA");
+
+      $(this).val(tmp === "" ? "" : val);
+    });
+
+    // Strip the thousands separator when the user puts the input in focus
+    $inp.on("focus", function () {
+      $(this).val($(this).val().replace(/,/g, ""));
+    });
+  }
+
+  function sizePanenInput(inp) {
+    const $inp = $(`#${inp}`);
+    const allowedChar = "0123456789-";
+    const allowedPattern = /^(\d+)(-\d+)?$/;
+
+    // Restricts input to numeric keys number and "-"
+    $inp.on("keypress", function (e) {
+      if (allowedChar.indexOf(e.key) === -1) {
+        e.preventDefault();
+      }
+    });
+
+    $inp.on("blur", function (e) {
+      const inputValue = $(this).val();
+
+      if (!allowedPattern.test(inputValue) && inputValue) {
+        // If the input value doesn't match the pattern, prevent the input
+        $(this).val("");
+        alert("Tolong masukan size ikan sesuai format");
+      }
+    });
+  }
+
+  function setInputValidation($element, validationFn) {
+    $element.each((index, element) => {
+      validationFn(element.id);
     });
   }
   // end of DOM FUNCTION section

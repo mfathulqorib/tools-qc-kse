@@ -142,6 +142,7 @@
       this.maxPonds = 10;
       this.pondList;
       this.totalPonds;
+      this.leadId;
     }
 
     addPond() {
@@ -174,7 +175,7 @@
       const pondSelect = $("<select>", {
         id: `no-kolam-${pondCount}`,
         class: "form-select",
-        name: `no-kolam-${pondCount}`,
+        name: `kolam-id-${pondCount}`,
       });
       const defaultOption = $("<option>", {
         disabled: true,
@@ -188,7 +189,9 @@
       pondList.forEach((pondNumber, index) => {
         pondSelect.append(
           $("<option>", {
-            value: pondNumber,
+            value: `${this.leadId}${"0".repeat(
+              4 - (pondNumber?.toString().length || 0)
+            )}${pondNumber ?? ""}`,
             text: pondNumber,
           })
         );
@@ -227,7 +230,15 @@
           sizeIkanElement
         );
 
-        setNumericInputValidation();
+        const $numericInput = $(".numeric-input");
+        const $sizePanenInput = $(".size-panen-validation");
+
+        setInputValidation($numericInput, (elementId) => {
+          numericInput(elementId);
+        });
+        setInputValidation($sizePanenInput, (elementId) => {
+          sizePanenInput(elementId);
+        });
       }
     }
 
@@ -289,7 +300,7 @@
       const sizeIkanInput = $("<input>", {
         id: `size-ikan-grade-${numberToChar(gradePanenCount)}`,
         name: `size-ikan-grade-${numberToChar(gradePanenCount)}`,
-        class: "form-control numeric-input",
+        class: "form-control size-panen-validation",
         type: "text",
         placeholder: "Dalam satuan ekor/kg",
       });
