@@ -1,4 +1,18 @@
 <script>
+  function historikalCultivationCycleHandler() {
+    const $question = $("#historikal-siklus");
+    const $fileInput = $("#historikal-komoditas");
+
+    $question.on("change", () => {
+      const isBelumPernahBudidaya =
+        $question.val() === "Belum pernah dipakai budidaya";
+      if (isBelumPernahBudidaya) {
+        $fileInput.prop("required", false).prop("disabled", true);
+      } else {
+        $fileInput.prop("required", true).prop("disabled", false);
+      }
+    });
+  }
   function functionInit() {
     try {
       const $fieldNumericInput = $(".numeric-input");
@@ -11,6 +25,7 @@
       handlingChangeArea();
       handlingChangeFarmer({});
       handlingChangePond();
+      historikalCultivationCycleHandler();
 
       $fieldNumericInput.each((index, element) => {
         numericInput(element.id);

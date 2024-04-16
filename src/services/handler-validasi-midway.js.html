@@ -12,6 +12,11 @@
       handlingChangeFarmer({ pondCreate: true });
       handlingChangePond();
       handlingYesOrNoQuestion("#apakah-ada-buyer", ".on-ada-buyer-change");
+      handlingYesOrNoQuestion(
+        "#apakah-bisa-sampling",
+        ".on-bisa-sampling-change"
+      );
+      setMaxDateToday("#tanggal-tebar");
 
       $fieldNumericInput.each((index, element) => {
         numericInput(element.id);

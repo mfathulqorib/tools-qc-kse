@@ -393,6 +393,17 @@
     $fileInput.prop("max", maxDate);
   }
 
+  function setMinDateToday(fileInputSelector) {
+    const $fileInput = $(fileInputSelector);
+    const now = new Date();
+    const tommorow = new Date();
+    tommorow.setDate(now.getDate() + 1);
+
+    const minDate = tommorow.toISOString().substring(0, 10);
+
+    $fileInput.prop("min", minDate);
+  }
+
   function resetObjectProperty(obj, prop, value) {
     obj[prop] = value;
   }

@@ -1,21 +1,22 @@
 const userProperties = PropertiesService.getUserProperties();
-const pageMode = userProperties.getProperty("mode");
-const activePage = listSheetInformation[pageMode];
+const pageMode = userProperties.getProperty("mode") ?? "validasi-1";
+const activePage =
+  listSheetInformation[pageMode] ?? listSheetInformation["validasi-1"];
 
 // use regex to search sheet enum_list
 const sheetEnumList = /enum_list/i;
 
 const sheetName = getSheetsName(
-  activePage.sheetId || listSheetInformation.Validasi1.sheetId
+  activePage.sheetId ?? listSheetInformation.Validasi1.sheetId
 );
 const index = (targetSheetName) =>
   sheetName.findIndex((name) => targetSheetName.test(name));
 const sheet = ss(
-  activePage.sheetId || listSheetInformation.Validasi1.sheetId
+  activePage.sheetId ?? listSheetInformation.Validasi1.sheetId
 ).getSheetByName(sheetName[index(sheetEnumList)]);
 
 function doGet(e) {
-  let page = e.parameter.mode || "validasi-1";
+  let page = e.parameter.mode ?? "validasi-1";
   let html = HtmlService.createTemplateFromFile(`src/page/${page}`)
     .evaluate()
     .setTitle("Tools QC KSE");
