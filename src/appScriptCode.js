@@ -249,10 +249,6 @@ function uploadData(formData) {
     .filter(String).length;
   const lastRowSheetAssessment = sheetAssessmentKolam.getLastRow();
   const lastColumnSheetAssessment = sheetAssessmentKolam.getLastColumn();
-  const { "lead-id": leadId, "nomor-kolam": pondNumber } = formData;
-  const pondId = `${leadId}${"0".repeat(
-    Math.abs(4 - (pondNumber?.toString().length || 0))
-  )}${pondNumber ?? ""}`;
 
   const dataForSheet = [
     [
@@ -267,6 +263,11 @@ function uploadData(formData) {
         if (isNumeric) {
           return formData[key]?.toString().replace(",", "") || "-";
         } else if (isPondId) {
+          const { "lead-id": leadId, "nomor-kolam": pondNumber } = formData;
+          const pondId = `${leadId}${"0".repeat(
+            Math.abs(4 - (pondNumber?.toString().length || 0))
+          )}${pondNumber ?? ""}`;
+
           return pondId || "-";
         } else if (isSetFormula) {
           return;

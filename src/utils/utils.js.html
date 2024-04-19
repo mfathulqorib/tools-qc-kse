@@ -85,6 +85,10 @@
     const fileUpload = $("#foto")[0].files;
     const namaPetani = $("#nama").val();
     const nomerKolam = $("#nomor-kolam").val() || "";
+    const isNoKolam = nomerKolam.length < 4;
+    const validatedNomerKolam = isNoKolam
+      ? nomerKolam
+      : nomerKolam.slice(nomerKolam.length - 4);
 
     const uploadDataPromise = new Promise((resolve, reject) => {
       google.script.run
@@ -107,7 +111,7 @@
         [...fileArray].slice(0, limit).map((file, i) => {
           return readFileAsDataURL(file).then(([metadata, data]) => ({
             fileName: `${prefix} ${namaPetani.toUpperCase()} ${
-              nomerKolam ? `KOLAM${nomerKolam}` : ""
+              validatedNomerKolam ? `KOLAM ${validatedNomerKolam}` : ""
             } (${i + 1})`,
             mimeType: metadata.match(/:(\w.+);/)[1],
             data,
