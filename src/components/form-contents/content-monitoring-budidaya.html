@@ -110,7 +110,7 @@
       <div class="d-flex gap-2">
         <input
           type="number"
-          class="form-control on-area-change on-farmers-change on-pond-change"
+          class="form-control on-area-change on-farmers-change on-pond-change on-kematian-ikan-change"
           name="jumlah-kematian-ikan"
           id="jumlah-kematian-ikan"
           min="1"
@@ -118,7 +118,7 @@
           required
         />
         <select
-          class="form-select on-area-change on-farmers-change on-pond-change"
+          class="form-select on-area-change on-farmers-change on-pond-change on-kematian-ikan-change"
           id="satuan-kuantitas"
           name="satuan-kuantitas"
           disabled
@@ -143,6 +143,21 @@
         disabled
         required
       ></select>
+    </div>
+  </div>
+  <div class="ps-3">
+    <div class="d-flex flex-column gap-1">
+      <label for="total-penggunaan-pakan">Total penggunaan pakan (kg)</label>
+      <div class="form-text" id="keterangan-terakhir-input-data-pakan"></div>
+      <input
+        type="text"
+        class="form-control on-inputhange on-farmers-change on-pond-change numeric-input"
+        id="total-penggunaan-pakan"
+        name="total-penggunaan-pakan"
+        placeholder="Dalam satuan kg"
+        disabled
+        required
+      />
     </div>
   </div>
   <div class="ps-3">

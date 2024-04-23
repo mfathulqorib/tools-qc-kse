@@ -2,7 +2,8 @@
   function handlingFormMonitoringBudidaya(formData) {
     const formId = formData.id;
     const namaPetani = $("#nama").val();
-    const nomerKolam = $("#nomor-kolam").val() || "";
+    const kolamId = $("#nomor-kolam").val() ?? "";
+    const nomerKolam = kolamId ? kolamId.slice(kolamId.length - 4) : "";
     const fileKematianIkan = $("#foto-kematian")[0].files || [];
     const fileLogbookPakan = $("#foto-logbook-pakan")[0].files || [];
     const fileBencanaAlam = $("#foto-bencana-alam")[0].files || [];
@@ -29,7 +30,7 @@
         [...fileArray].slice(0, limit).map((file, i) => {
           return readFileAsDataURL(file).then(([metadata, data]) => ({
             fileName: `${prefix} ${namaPetani.toUpperCase()} ${
-              nomerKolam ? `KOLAM${nomerKolam}` : ""
+              nomerKolam ? `KOLAM ${nomerKolam}` : ""
             } (${i + 1})`,
             mimeType: metadata.match(/:(\w.+);/)[1],
             data,
@@ -41,7 +42,7 @@
 
     const photosDokumentasi = generateFileData(
       fileDokumentasi,
-      "",
+      "BUKTI VISIT",
       "dokumentasi",
       1
     );
@@ -99,8 +100,13 @@
 
   function functionInit() {
     try {
+      const $numericInput = $(".numeric-input");
+
       $(window).on("beforeunload", showModalsOnLoading);
       $("#loading-button").hide();
+      setInputValidation($numericInput, (elementId) => {
+        numericInput(elementId);
+      });
       preventFormSubmit("form-monitoring-budidaya");
       createListArea();
       createListOnPageLoad();
@@ -108,6 +114,10 @@
       handlingChangeFarmer({ pondCreate: true });
       setMaxDateToday("#tanggal-cek-budidaya");
       handlingYesOrNoQuestion("#apakah-mencatat-pakan", "#foto-logbook-pakan");
+      handlingYesOrNoQuestion(
+        "#apakah-ada-kematian",
+        ".on-kematian-ikan-change"
+      );
     } catch (err) {
       onFailure(err);
     }

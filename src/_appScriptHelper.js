@@ -213,6 +213,7 @@ const listSheetInformation = {
       "jumlah-kematian-ikan",
       "satuan-kuantitas",
       "apakah-mencatat-pakan",
+      "total-penggunaan-pakan",
       "keterangan",
       "suhu",
       "dissolved-oxygen",

@@ -84,11 +84,11 @@
     const formId = formData.id;
     const fileUpload = $("#foto")[0].files;
     const namaPetani = $("#nama").val();
-    const nomerKolam = $("#nomor-kolam").val() || "";
-    const isNoKolam = nomerKolam.length < 4;
-    const validatedNomerKolam = isNoKolam
-      ? nomerKolam
-      : nomerKolam.slice(nomerKolam.length - 4);
+    const nomerKolamOrKolamId = $("#nomor-kolam").val() || "";
+    const isNomerKolam = nomerKolamOrKolamId.length < 4;
+    const validatedNomerKolam = isNomerKolam
+      ? nomerKolamOrKolamId
+      : nomerKolamOrKolamId.slice(nomerKolamOrKolamId.length - 4);
 
     const uploadDataPromise = new Promise((resolve, reject) => {
       google.script.run
