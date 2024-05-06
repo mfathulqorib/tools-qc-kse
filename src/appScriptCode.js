@@ -103,7 +103,12 @@ function getNavbar(page) {
   const navbarTemplate = `
   <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
+      <div>
       <a class="navbar-brand ps-3">Tools QC - 2024 🔥</a>
+      <p class="navbar-brand ps-3 py-1 m-0 fs-6"> Form ${kebabToStartCase(
+        page
+      )}</p>
+      </div>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon" id="trigger-btn"></span>
       </button>
@@ -229,6 +234,22 @@ function getEnumList(id) {
   const list = rawList.filter(String);
 
   return list;
+}
+
+function getData(id) {
+  const range = activePage.columnRanges[id];
+  const rawData = sheet.getRange(range).getDisplayValues();
+  const filteredData = rawData.filter((arr) => {
+    return arr.some((value) => {
+      return value !== "";
+    });
+  });
+  const obj = filteredData.reduce((acc, curr) => {
+    acc[curr[0]] = curr.slice(1);
+    return acc;
+  }, {});
+
+  return obj;
 }
 
 // end of GET DATA from spreadsheet section

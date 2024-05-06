@@ -1,4 +1,6 @@
 <script>
+  const dataFromSheet = new DataFromSheet();
+
   function handlingFormMonitoringBudidaya(formData) {
     const formId = formData.id;
     const namaPetani = $("#nama").val();
@@ -98,6 +100,35 @@
       });
   }
 
+  function getDataOnPageLoad(id) {
+    google.script.run
+      .withSuccessHandler((values) => {
+        dataFromSheet.data = values;
+      })
+      .withFailureHandler(onFailure)
+      .getData(id);
+  }
+
+  function showLastInputFeed() {
+    const $nomorKolam = $("#nomor-kolam");
+
+    $nomorKolam.on("change", (e) => {
+      const pondId = e.target.value;
+      const lastInputPakan = dataFromSheet.data[pondId];
+      const $keteranganInputDataPakan = $("#keterangan-input-data-pakan");
+
+      if (lastInputPakan[0]) {
+        $keteranganInputDataPakan.html(
+          `Terakhir input data pakan kolam ini tanggal <b>${lastInputPakan[0]}</b> dengan total <b>${lastInputPakan[1]}kg</b>`
+        );
+      } else {
+        $keteranganInputDataPakan.html(
+          "Kolam ini belum pernah diinput data pakannya. Tolong input data pakan"
+        );
+      }
+    });
+  }
+
   function functionInit() {
     try {
       const $numericInput = $(".numeric-input");
@@ -110,14 +141,16 @@
       preventFormSubmit("form-monitoring-budidaya");
       createListArea();
       createListOnPageLoad();
+      getDataOnPageLoad("data-penggunaan-pakan");
       handlingChangeArea();
-      handlingChangeFarmer({ pondCreate: true });
+      handlingChangeFarmer({ pondCreate: true, isPondIdValue: true });
       setMaxDateToday("#tanggal-cek-budidaya");
       handlingYesOrNoQuestion("#apakah-mencatat-pakan", "#foto-logbook-pakan");
       handlingYesOrNoQuestion(
         "#apakah-ada-kematian",
         ".on-kematian-ikan-change"
       );
+      showLastInputFeed();
     } catch (err) {
       onFailure(err);
     }

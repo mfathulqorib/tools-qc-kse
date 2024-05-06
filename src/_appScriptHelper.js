@@ -225,6 +225,7 @@ const listSheetInformation = {
       "list-petani": "B2:C",
       "nomor-kolam": "D2:F",
       "kondisi-budidaya": "G2:G",
+      "data-penggunaan-pakan": "H2:J",
     },
   },
   "monitoring-sampling": {
