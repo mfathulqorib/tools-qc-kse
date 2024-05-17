@@ -125,12 +125,14 @@ const listSheetInformation = {
       "estimasi-siap-tebar",
       "satuan-waktu",
       "setFormulaEstimasiTanggalSiapTebar",
+      "sumber-benih",
     ],
     columnRanges: {
       area: "A2:A",
       "list-petani": "B2:C",
       "nomor-kolam": "D2:F",
       "status-kesiapan-kolam": "G2:G",
+      "sumber-benih": "H2:H",
     },
     setFormulaEstimasiTanggalSiapTebar: function (sheet, row, col) {
       sheet.getRange(row, col).setFormula(

@@ -269,7 +269,12 @@ function uploadData(formData) {
     .getValues()
     .filter(String).length;
   const lastRowSheetAssessment = sheetAssessmentKolam.getLastRow();
-  const lastColumnSheetAssessment = sheetAssessmentKolam.getLastColumn();
+  const regexSetFormula = /^setFormula/i;
+  const indexSetFormula = activePage.orderedKeyUploadData
+    .map((key, index) => {
+      return regexSetFormula.test(key) ? index : -1;
+    })
+    .filter((index) => index !== -1);
 
   const dataForSheet = [
     [
@@ -291,7 +296,7 @@ function uploadData(formData) {
 
           return pondId || "-";
         } else if (isSetFormula) {
-          return;
+          return activePage[isSetFormula];
         } else {
           return formData[key] || "-";
         }
@@ -311,12 +316,14 @@ function uploadData(formData) {
       /^setFormula/.test(key)
     );
 
-    setFormula.forEach((key, index) => {
-      activePage[key](
-        sheetAssessmentKolam,
-        lastRowSheetAssessment + 1,
-        lastColumnSheetAssessment + index
-      );
+    setFormula.forEach((key) => {
+      const column =
+        parseInt(indexSetFormula) +
+        1 +
+        dataForSheet[0].length -
+        activePage.orderedKeyUploadData.length;
+
+      activePage[key](sheetAssessmentKolam, lastRowSheetAssessment + 1, column);
     });
   }
 
